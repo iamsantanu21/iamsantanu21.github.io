@@ -377,7 +377,9 @@ footer .fsoc svg{width:20px;height:20px}
 @media(max-width:900px){
   body.snap .hero{display:flex}
   .hero{display:flex;flex-direction:column;align-items:center}
-  .portrait-wrap{order:-1;margin-bottom:6px}
+  .portrait-wrap{order:-1;margin-bottom:6px;margin-inline:auto}
+  /* centre the photo ring inside its wrapper so it lines up with the orbit chips */
+  .portrait-ring{margin-inline:auto}
 }
 
 /* ---------- Phone-only: shrink hero portrait + orbit so chips never clip ---------- */
