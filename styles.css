@@ -134,7 +134,19 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .3s eas
   background:var(--surface-solid);border:1px solid var(--border);border-radius:9px;padding:5px 11px;font-size:.74rem;font-weight:600;
   white-space:nowrap;box-shadow:var(--shadow);transition:all .25s;color:var(--text);display:flex;align-items:center;gap:7px}
 .dots a .dlabel .dnum{font-family:'JetBrains Mono';font-size:.68rem;color:var(--accent)}
-.dots a:hover .dlabel,.dots a.active .dlabel{opacity:1;transform:translateY(-50%) translateX(0)}
+.dots a:hover .dlabel{opacity:1;transform:translateY(-50%) translateX(0)}
+/* preview mini-lists on the home highlights panel */
+.mini{list-style:none;margin:2px 0 18px;padding:0;display:flex;flex-direction:column;gap:11px;flex:1}
+.mini li{color:var(--text-2);font-size:.92rem;line-height:1.4;padding-left:17px;position:relative}
+.mini li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.mini li b{color:var(--text);font-weight:600}
+.viewall{align-self:flex-start;font-family:'JetBrains Mono';font-size:.8rem;font-weight:600;color:var(--accent);
+  display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid transparent;transition:gap .2s,border-color .2s}
+.viewall:hover{gap:10px;border-bottom-color:var(--accent)}
+.viewall svg{width:14px;height:14px}
+/* fallback grid so the highlights panel stays 3-up even without Tailwind */
+#explore .grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:768px){#explore .grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:960px){.dots{display:none}}
 
 /* ---------- Hero ---------- */
