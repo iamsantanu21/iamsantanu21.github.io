@@ -46,6 +46,36 @@
   els.forEach(function(el){io.observe(el)});
 })();
 
+/* ---- Strict full-page nav: Arrow / Page / Space move one section at a time ---- */
+(function(){
+  if(!document.body.classList.contains('snap')) return;
+  var panels=Array.prototype.slice.call(document.querySelectorAll('.hero, .section'));
+  if(!panels.length) return;
+  var animating=false;
+  function currentIndex(){
+    var mid=window.scrollY+window.innerHeight/2, idx=0, best=Infinity;
+    panels.forEach(function(p,i){var c=p.offsetTop+p.offsetHeight/2,d=Math.abs(c-mid); if(d<best){best=d;idx=i;}});
+    return idx;
+  }
+  function go(i){
+    i=Math.max(0,Math.min(panels.length-1,i));
+    animating=true;
+    panels[i].scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(function(){animating=false;},700);
+  }
+  window.addEventListener('keydown',function(e){
+    if(e.defaultPrevented) return;
+    var t=(e.target.tagName||'').toLowerCase();
+    if(t==='input'||t==='textarea'||e.target.isContentEditable) return;
+    if(window.matchMedia('(max-width:900px)').matches) return; // free scroll on small screens
+    var k=e.key;
+    if(k==='ArrowDown'||k==='PageDown'||(k===' '&&!e.shiftKey)){e.preventDefault(); if(!animating) go(currentIndex()+1);}
+    else if(k==='ArrowUp'||k==='PageUp'||(k===' '&&e.shiftKey)){e.preventDefault(); if(!animating) go(currentIndex()-1);}
+    else if(k==='Home'){e.preventDefault(); go(0);}
+    else if(k==='End'){e.preventDefault(); go(panels.length-1);}
+  });
+})();
+
 /* ---- Section dots: highlight the section you're currently in ---- */
 (function(){
   var dots=document.querySelectorAll('.dots a');
