@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Projects — Santanu Mondal</title>
+<meta name="description" content="Open-source projects by Santanu Mondal across blockchain, zero-knowledge cryptography, Edge AI, ML security and distributed systems.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Bengali:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:['selector','[data-theme="dark"]']}</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-fx"></div>
+<div class="fx-layer"><div class="blob a"></div><div class="blob b"></div></div>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html#home" class="brand"><span class="dot"></span>Santanu<span style="color:var(--text-3);font-weight:400">.dev</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="publications.html">Publications</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="education.html">Education</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg>
+      </button>
+      <button class="icon-btn menu-toggle" id="menuBtn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+  <a class="back-link" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back to Home</a>
+  <span class="eyebrow">Projects</span>
+  <h1>Selected <span class="grad">Work</span></h1>
+  <p>Open-source projects spanning blockchain, zero-knowledge cryptography, Edge AI, ML security, and distributed systems.</p>
+</section>
+
+<!-- ===== PROJECTS GRID ===== -->
+<section class="section" style="padding-top:clamp(24px,4vw,40px)">
+  <!--
+     ======================================================================
+     HOW TO ADD A PROJECT:
+       1. Copy one whole <div class="proj"> ... </div> block below.
+       2. Paste it into the grid.
+       3. Edit the kicker (category), title, description and the stack tags.
+       4. Change the GitHub link (the <a class="gh" href="..."> at the top-right).
+       (The icon is optional — you can reuse any of the ones below.)
+     ======================================================================
+  -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4a3 3 0 013 3v4.5"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/Multiple_Identity_management_of_IoT_devices_using_blockchain" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">Blockchain · Thesis</div>
+      <h3>Multiple Identity Management of IoT Devices</h3>
+      <p>A Hyperledger Fabric permissioned-blockchain system for managing multiple IoT device identities. JavaScript chaincode for identity registration and asset transfer, a Fabric Gateway SDK client, and network monitoring via Hyperledger Explorer.</p>
+      <div class="stack"><span>Hyperledger Fabric</span><span>Chaincode</span><span>Gateway SDK</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/One-Human-One-Vote" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">ZK Cryptography · Hackathon</div>
+      <h3>One-Human-One-Vote</h3>
+      <p>A privacy-preserving, decentralized voting dApp built at the IIT Madras (CyStar) Winter School Hackathon. Solidity smart contracts with Merkle-tree eligibility commitments, zero-knowledge membership proofs, and nullifiers guaranteeing anonymity without linking votes to voters.</p>
+      <div class="stack"><span>Solidity</span><span>Zero-Knowledge</span><span>Merkle Trees</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7z"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/Decentralized-Voting-DApp" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">Ethereum · Smart Contracts</div>
+      <h3>Decentralized Voting DApp</h3>
+      <p>An Ethereum voting smart contract (Solidity, Hardhat, Ethers.js) supporting multiple time-bound elections, one-vote-per-address enforcement, and real-time tallying — deployed and verified on the Sepolia testnet via Alchemy RPC with event logging and admin access controls.</p>
+      <div class="stack"><span>Solidity</span><span>Hardhat</span><span>Ethers.js</span><span>Sepolia</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5.6 5.6l2 2M16.4 16.4l2 2M18.4 5.6l-2 2M7.6 16.4l-2 2"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/MalURLX" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">ML Security · NLP</div>
+      <h3>MalURLX — Malicious URL Detection</h3>
+      <p>An end-to-end ML system detecting malicious URLs from lexical and character-level TF-IDF features with a LightGBM classifier (~95–98% accuracy), served through a FastAPI/Uvicorn REST API and shipped with a companion Chrome extension for real-time browser protection.</p>
+      <div class="stack"><span>LightGBM</span><span>TF-IDF</span><span>FastAPI</span><span>Chrome Ext.</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/ACM-Winter-School-EdgeAI-Hackathon" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">Edge AI · Accessibility</div>
+      <h3>Third Eye — Assistive Navigation</h3>
+      <p>A fully on-device wearable navigation aid for visually impaired users on the Arduino Nicla Vision (ACM Winter School Edge AI Hackathon, IISc). Fuses ToF distance sensing and IMU-based fall detection with an INT8-quantized vision model (10× smaller, 0.80 accuracy), streaming real-time alerts over UDP to a Flutter/Streamlit UI.</p>
+      <div class="stack"><span>Arduino Nicla</span><span>INT8 Quant.</span><span>ToF + IMU</span><span>Flutter</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10a6 6 0 00-11.5-2A4.5 4.5 0 006 17h11a4 4 0 001-7z"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/Alumni-Management-System-on-AWS" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">Cloud · LAMP</div>
+      <h3>Alumni Management System on AWS</h3>
+      <p>A PHP/MySQL (LAMP) web application deployed on an AWS EC2 Ubuntu instance — configured security groups and SSH access, and managed provisioning and database import via PuTTY, FileZilla, and phpMyAdmin.</p>
+      <div class="stack"><span>AWS EC2</span><span>PHP/MySQL</span><span>LAMP</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/Remote-Desktop" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">Networking · Systems</div>
+      <h3>Remote Desktop — Screen Sharing</h3>
+      <p>A Python remote-desktop tool that streams a host's screen and relays remote mouse/keyboard control. Captured JPEG-encoded frames with OpenCV, evolved the transport from TCP to TLS-secured chunked UDP streaming (~20 FPS), and replayed input events with pynput across multi-threaded clients.</p>
+      <div class="stack"><span>Python</span><span>OpenCV</span><span>UDP/TLS</span><span>pynput</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v3a2 2 0 002 2h10a2 2 0 002-2V8M12 13v3"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/Distributed-Systems-LAB" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">Distributed Computing</div>
+      <h3>Distributed Systems Lab</h3>
+      <p>A suite of distributed-computing programs — Java RMI chat and client-server apps, DNS resolution, IP multicast, distributed image processing, and a distributed number generator — demonstrating remote invocation, group communication, and parallel computing.</p>
+      <div class="stack"><span>Java RMI</span><span>Multicast</span><span>Parallel</span></div>
+    </div>
+
+    <!-- ⬆️ To add another project, copy a block above and edit it. -->
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="fsoc">
+    <a href="https://github.com/iamsantanu21" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+    <a href="https://www.linkedin.com/in/iamsantanu21/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.3a1.7 1.7 0 110-3.5 1.7 1.7 0 010 3.5zM19 19h-3v-4.7c0-1.1 0-2.6-1.6-2.6s-1.8 1.2-1.8 2.5V19h-3v-9h2.9v1.2h.04a3.2 3.2 0 012.9-1.6c3 0 3.6 2 3.6 4.6z"/></svg></a>
+    <a href="https://scholar.google.com/citations?user=8stzW6gAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.9V17h2V9zM5 13.2v3.2c0 1.7 3.1 3.6 7 3.6s7-1.9 7-3.6v-3.2l-7 3.8z"/></svg></a>
+    <a href="https://orcid.org/0009-0001-6243-1709" target="_blank" rel="noopener" aria-label="ORCID"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 100 24 12 12 0 000-24zM7.4 18H5.6V8.1h1.8V18zM6.5 6.8a1.05 1.05 0 110-2.1 1.05 1.05 0 010 2.1zM18.4 13.4c0 2.8-1.8 4.6-4.6 4.6H9.9V8.1h3.9c2.8 0 4.6 1.8 4.6 5.3zm-1.9 0c0-2.5-1.2-3.6-3-3.6h-1.8v6.5h1.8c1.6 0 3-1 3-2.9z"/></svg></a>
+  </div>
+  <div>© <span id="year"></span> Santanu Mondal · শান্তনু মন্ডল · Hosted on GitHub Pages</div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

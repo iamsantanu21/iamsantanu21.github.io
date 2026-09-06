@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Santanu Mondal — Security Researcher</title>
 <meta name="description" content="Santanu Mondal (Bitanu) — M.Tech in Network & Information Security. Researcher in blockchain, cryptography, IoT security, CBDCs, and Edge AI.">
 <meta name="author" content="Santanu Mondal">
-<!-- Open Graph -->
 <meta property="og:title" content="Santanu Mondal — Security Researcher">
 <meta property="og:description" content="Researcher in blockchain, cryptography, IoT security, CBDCs, and Edge AI. Seeking PhD / research roles.">
 <meta property="og:type" content="website">
@@ -14,313 +13,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Bengali:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-/* ============ TOKENS ============ */
-:root{
-  --bg:#f7f8fc;
-  --bg-2:#ffffff;
-  --bg-3:#eef1f8;
-  --surface:rgba(255,255,255,0.72);
-  --surface-solid:#ffffff;
-  --border:rgba(15,23,42,0.10);
-  --border-strong:rgba(15,23,42,0.16);
-  --text:#0f172a;
-  --text-2:#475569;
-  --text-3:#64748b;
-  --accent:#0891b2;      /* cyan */
-  --accent-2:#7c3aed;    /* violet */
-  --accent-soft:rgba(8,145,178,0.12);
-  --accent-2-soft:rgba(124,58,237,0.12);
-  --glow:rgba(8,145,178,0.25);
-  --grid-line:rgba(15,23,42,0.04);
-  --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 30px rgba(15,23,42,.06);
-  --shadow-lg:0 20px 50px rgba(15,23,42,.12);
-  --radius:18px;
-  --radius-sm:12px;
-  --maxw:1120px;
-}
-[data-theme="dark"]{
-  --bg:#070b16;
-  --bg-2:#0c1222;
-  --bg-3:#0f1729;
-  --surface:rgba(18,26,45,0.55);
-  --surface-solid:#101a30;
-  --border:rgba(148,163,184,0.14);
-  --border-strong:rgba(148,163,184,0.26);
-  --text:#e8eefc;
-  --text-2:#a7b4cc;
-  --text-3:#7c8aa8;
-  --accent:#22d3ee;      /* neon cyan */
-  --accent-2:#a78bfa;    /* neon violet */
-  --accent-soft:rgba(34,211,238,0.14);
-  --accent-2-soft:rgba(167,139,250,0.16);
-  --glow:rgba(34,211,238,0.35);
-  --grid-line:rgba(148,163,184,0.06);
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 40px rgba(0,0,0,.5);
-  --shadow-lg:0 24px 70px rgba(0,0,0,.6);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-  transition:background .4s ease,color .4s ease;
-}
-h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;line-height:1.15;letter-spacing:-.01em;margin:0}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-.mono{font-family:'JetBrains Mono',monospace}
-
-/* ============ BACKGROUND FX ============ */
-.bg-fx{position:fixed;inset:0;z-index:-2;pointer-events:none;
-  background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
-  background-size:54px 54px;
-  mask-image:radial-gradient(circle at 50% 0%,black,transparent 78%);
-  -webkit-mask-image:radial-gradient(circle at 50% 0%,black,transparent 78%);
-}
-.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.5;z-index:-1;pointer-events:none;transition:opacity .4s}
-.blob.a{width:520px;height:520px;background:radial-gradient(circle,var(--glow),transparent 70%);top:-160px;right:-120px}
-.blob.b{width:480px;height:480px;background:radial-gradient(circle,var(--accent-2-soft),transparent 70%);top:40%;left:-160px}
-[data-theme="dark"] .blob{opacity:.7}
-
-/* ============ NAV ============ */
-header.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .3s ease}
-.nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
-  background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:1px solid transparent;border-radius:0;transition:all .3s ease}
-.nav.scrolled .nav-inner{margin:10px auto;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);max-width:calc(var(--maxw) - 40px)}
-.brand{font-family:'Space Grotesk';font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:9px}
-.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
-.nav-links{display:flex;gap:6px;align-items:center}
-.nav-links a{padding:8px 14px;border-radius:10px;font-size:.9rem;font-weight:500;color:var(--text-2);transition:all .2s}
-.nav-links a:hover{color:var(--text);background:var(--accent-soft)}
-.nav-tools{display:flex;gap:8px;align-items:center}
-.icon-btn{width:40px;height:40px;border-radius:11px;border:1px solid var(--border);background:var(--surface-solid);color:var(--text);
-  display:grid;place-items:center;cursor:pointer;transition:all .2s}
-.icon-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.icon-btn svg{width:19px;height:19px}
-.menu-toggle{display:none}
-@media(max-width:860px){
-  .nav-links{position:fixed;inset:0 0 auto 0;top:0;flex-direction:column;background:var(--bg-2);padding:88px 24px 28px;
-    transform:translateY(-110%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:var(--shadow-lg);gap:4px;border-bottom:1px solid var(--border)}
-  .nav-links.open{transform:translateY(0)}
-  .nav-links a{width:100%;padding:14px 16px;font-size:1.05rem}
-  .menu-toggle{display:grid}
-}
-
-/* ============ LAYOUT ============ */
-section{max-width:var(--maxw);margin:0 auto;padding:96px 24px;position:relative}
-.eyebrow{font-family:'JetBrains Mono';font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--accent);display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
-.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
-.sec-title{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:700;margin-bottom:14px}
-.sec-sub{color:var(--text-2);max-width:620px;font-size:1.02rem;margin-bottom:44px}
-
-/* ============ HERO ============ */
-.hero{min-height:100vh;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:50px;padding-top:130px;padding-bottom:60px}
-.hero-badge{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:100px;border:1px solid var(--border);
-  background:var(--surface);font-size:.82rem;font-weight:500;color:var(--text-2);margin-bottom:26px}
-.hero-badge .pulse{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.5);animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-.hero h1{font-size:clamp(2.6rem,6.5vw,4.4rem);font-weight:700;margin-bottom:8px}
-.hero h1 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .bengali-name{font-family:'Noto Sans Bengali',sans-serif;font-weight:600;font-size:clamp(1.3rem,3.2vw,2rem);color:var(--text-2);margin-bottom:14px;letter-spacing:.01em}
-.hero .role{font-family:'JetBrains Mono';font-size:clamp(1rem,2.4vw,1.35rem);color:var(--text-2);margin-bottom:24px;min-height:1.6em}
-.hero .role .cursor{display:inline-block;width:2px;height:1.05em;background:var(--accent);vertical-align:-2px;margin-left:2px;animation:blink 1s step-end infinite}
-@keyframes blink{50%{opacity:0}}
-.hero p.lead{color:var(--text-2);font-size:1.08rem;max-width:540px;margin-bottom:30px}
-.hero .lead b{color:var(--text);font-weight:600}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
-.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:13px;font-weight:600;font-size:.96rem;cursor:pointer;transition:all .25s;border:1px solid transparent}
-.btn svg{width:18px;height:18px}
-.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 8px 24px var(--glow)}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 34px var(--glow)}
-.btn-ghost{background:var(--surface-solid);border-color:var(--border-strong);color:var(--text)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
-.socials{display:flex;gap:12px}
-.socials a{width:44px;height:44px;border-radius:12px;border:1px solid var(--border);background:var(--surface-solid);
-  display:grid;place-items:center;color:var(--text-2);transition:all .25s}
-.socials a:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow)}
-.socials svg{width:20px;height:20px}
-
-/* portrait */
-.portrait-wrap{position:relative;justify-self:center}
-.portrait-ring{position:relative;width:min(360px,78vw);aspect-ratio:1;border-radius:50%;
-  background:conic-gradient(from 180deg,var(--accent),var(--accent-2),var(--accent));padding:3px;
-  box-shadow:0 30px 80px var(--glow);animation:spin 14s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.portrait-inner{width:100%;height:100%;border-radius:50%;background:var(--bg-3);overflow:hidden;animation:spin 14s linear infinite reverse;position:relative}
-.portrait-inner img{width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.02)}
-.chip{position:absolute;background:var(--surface-solid);border:1px solid var(--border);border-radius:13px;padding:9px 14px;
-  font-size:.8rem;font-weight:600;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px;animation:float 5s ease-in-out infinite}
-.chip .ci{color:var(--accent)}.chip svg{width:16px;height:16px}
-.chip.c1{top:12%;left:-8%;animation-delay:0s}
-.chip.c2{bottom:16%;right:-10%;animation-delay:1.5s}
-.chip.c3{bottom:-2%;left:12%;animation-delay:.8s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-@media(max-width:920px){
-  .hero{grid-template-columns:1fr;text-align:center;gap:40px;padding-top:120px}
-  .cta-row,.socials{justify-content:center}
-  .hero p.lead{margin-left:auto;margin-right:auto}
-  .portrait-wrap{order:-1}
-}
-
-/* ============ STATS STRIP ============ */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
-.stat{padding:24px 20px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(10px);text-align:center;transition:all .3s}
-.stat:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--shadow)}
-.stat .num{font-family:'Space Grotesk';font-size:2.2rem;font-weight:700;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat .lbl{font-size:.86rem;color:var(--text-2);margin-top:4px}
-@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
-
-/* ============ ABOUT ============ */
-.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:44px;align-items:start}
-.about-grid p{color:var(--text-2);font-size:1.05rem;margin:0 0 18px}
-.about-grid p b{color:var(--text);font-weight:600}
-.focus-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);backdrop-filter:blur(10px);padding:26px;box-shadow:var(--shadow)}
-.focus-card h4{font-size:1rem;margin-bottom:16px;display:flex;align-items:center;gap:9px}
-.focus-card h4 svg{width:18px;height:18px;color:var(--accent)}
-.tags{display:flex;flex-wrap:wrap;gap:9px}
-.tag{font-family:'JetBrains Mono';font-size:.78rem;padding:6px 12px;border-radius:9px;border:1px solid var(--border);
-  background:var(--accent-soft);color:var(--text);font-weight:500}
-@media(max-width:820px){.about-grid{grid-template-columns:1fr}}
-
-/* ============ TIMELINE (education) ============ */
-.timeline{position:relative;padding-left:34px}
-.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--accent),var(--accent-2),transparent)}
-.tl-item{position:relative;margin-bottom:34px}
-.tl-item::before{content:"";position:absolute;left:-33px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-.tl-item .yr{font-family:'JetBrains Mono';font-size:.8rem;color:var(--accent);font-weight:600;letter-spacing:.03em}
-.tl-item h3{font-size:1.2rem;margin:5px 0 2px}
-.tl-item .school{color:var(--text);font-weight:600;font-size:.98rem}
-.tl-item .meta{color:var(--text-3);font-size:.9rem;margin-bottom:8px}
-.tl-item p{color:var(--text-2);font-size:.96rem;margin:6px 0 0}
-.tl-item p .k{color:var(--text);font-weight:600}
-.ilink{color:var(--accent);font-weight:600;border-bottom:1px solid transparent;transition:border-color .2s}
-.ilink:hover{border-bottom-color:var(--accent)}
-.doclinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.doclink{font-family:'JetBrains Mono';font-size:.75rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:7px;border:1px solid var(--border);transition:all .2s}
-.doclink:hover{background:var(--accent-soft);border-color:var(--accent)}
-.doclink svg{width:12px;height:12px}
-
-/* ============ PUBLICATIONS ============ */
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
-.filter{font-family:'JetBrains Mono';font-size:.82rem;padding:9px 16px;border-radius:10px;border:1px solid var(--border);
-  background:var(--surface-solid);color:var(--text-2);cursor:pointer;transition:all .2s;font-weight:500}
-.filter:hover{color:var(--text);border-color:var(--border-strong)}
-.filter.active{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 6px 18px var(--glow)}
-.pub-list{display:flex;flex-direction:column;gap:14px}
-.pub{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);backdrop-filter:blur(10px);
-  padding:22px 24px;display:flex;gap:18px;align-items:flex-start;transition:all .3s}
-.pub:hover{transform:translateX(6px);border-color:var(--accent);box-shadow:var(--shadow)}
-.pub .idx{font-family:'JetBrains Mono';font-size:.85rem;color:var(--accent);font-weight:600;padding-top:2px;min-width:26px}
-.pub .body{flex:1}
-.pub h4{font-size:1.06rem;margin-bottom:6px;line-height:1.35}
-.pub .authors{font-size:.9rem;color:var(--text-2);margin-bottom:8px}
-.pub .authors .me{color:var(--text);font-weight:700}
-.pub .venue{font-size:.88rem;color:var(--text-3);font-style:italic}
-.pub .pmeta{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
-.badge{font-family:'JetBrains Mono';font-size:.72rem;padding:4px 10px;border-radius:7px;font-weight:600;letter-spacing:.02em}
-.badge.published{background:rgba(34,197,94,.14);color:#16a34a}
-[data-theme="dark"] .badge.published{color:#4ade80}
-.badge.review{background:var(--accent-2-soft);color:var(--accent-2)}
-.badge.conf{background:var(--accent-soft);color:var(--accent)}
-.pub-link{font-family:'JetBrains Mono';font-size:.78rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:7px;border:1px solid var(--border);transition:all .2s}
-.pub-link:hover{background:var(--accent-soft);border-color:var(--accent)}
-.pub-link svg{width:13px;height:13px}
-
-/* ============ PROJECTS ============ */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
-.proj{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);backdrop-filter:blur(10px);
-  padding:26px;display:flex;flex-direction:column;transition:all .3s;position:relative;overflow:hidden}
-.proj::after{content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1px;
-  background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
-.proj:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
-.proj:hover::after{opacity:1}
-.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
-.proj-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--accent-soft),var(--accent-2-soft));display:grid;place-items:center;color:var(--accent);flex-shrink:0}
-.proj-icon svg{width:23px;height:23px}
-.proj .gh{color:var(--text-3);transition:all .2s}.proj .gh:hover{color:var(--accent);transform:scale(1.15)}
-.proj .gh svg{width:22px;height:22px}
-.proj h3{font-size:1.18rem;margin-bottom:9px}
-.proj .kicker{font-family:'JetBrains Mono';font-size:.74rem;color:var(--accent-2);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.proj p{color:var(--text-2);font-size:.94rem;flex:1;margin:0 0 16px}
-.proj .stack{display:flex;flex-wrap:wrap;gap:7px}
-.proj .stack span{font-family:'JetBrains Mono';font-size:.72rem;color:var(--text-3);padding:4px 9px;border-radius:7px;background:var(--bg-3);border:1px solid var(--border)}
-
-/* ============ SKILLS ============ */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
-.skill-cat{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);backdrop-filter:blur(10px);padding:24px;transition:all .3s}
-.skill-cat:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow)}
-.skill-cat h4{font-size:1rem;margin-bottom:15px;display:flex;align-items:center;gap:10px}
-.skill-cat h4 svg{width:19px;height:19px;color:var(--accent)}
-.skill-cat .tags .tag{background:var(--bg-3)}
-
-/* ============ ACTIVITIES ============ */
-.act-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.act{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);backdrop-filter:blur(10px);padding:20px 22px;transition:all .3s}
-.act:hover{border-color:var(--accent);transform:translateY(-3px)}
-.act .at{font-family:'JetBrains Mono';font-size:.76rem;color:var(--accent);font-weight:600;margin-bottom:6px;display:flex;justify-content:space-between;gap:8px}
-.act h4{font-size:1.02rem;margin-bottom:4px}
-.act p{color:var(--text-2);font-size:.9rem;margin:0}
-.act .cert{font-family:'JetBrains Mono';font-size:.72rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:5px;margin-top:12px;border-bottom:1px solid transparent;transition:border-color .2s}
-.act .cert:hover{border-bottom-color:var(--accent)}
-.act .cert svg{width:12px;height:12px}
-
-/* ============ CONTACT ============ */
-.contact{text-align:center}
-.contact-card{border:1px solid var(--border);border-radius:26px;background:var(--surface);backdrop-filter:blur(14px);
-  padding:56px 40px;max-width:760px;margin:0 auto;position:relative;overflow:hidden;box-shadow:var(--shadow)}
-.contact-card::before{content:"";position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:400px;height:400px;
-  background:radial-gradient(circle,var(--glow),transparent 70%);opacity:.5;pointer-events:none}
-.contact-card h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px;position:relative}
-.contact-card p{color:var(--text-2);font-size:1.05rem;max-width:480px;margin:0 auto 30px;position:relative}
-.contact-card .cta-row{justify-content:center;position:relative}
-.contact-methods{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:28px;position:relative}
-.contact-methods a{color:var(--text-2);font-size:.92rem;display:inline-flex;align-items:center;gap:8px;transition:color .2s}
-.contact-methods a:hover{color:var(--accent)}
-.contact-methods svg{width:17px;height:17px}
-
-/* ============ FOOTER ============ */
-footer{border-top:1px solid var(--border);padding:34px 24px;text-align:center;color:var(--text-3);font-size:.88rem}
-footer .fsoc{display:flex;gap:16px;justify-content:center;margin-bottom:16px}
-footer .fsoc a{color:var(--text-3);transition:all .2s}footer .fsoc a:hover{color:var(--accent);transform:translateY(-2px)}
-footer .fsoc svg{width:20px;height:20px}
-
-/* ============ REVEAL ANIM ============ */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .portrait-ring,.portrait-inner,.chip,.blob{animation:none!important}
-  html{scroll-behavior:auto}
-}
-/* scrollbar */
-::selection{background:var(--accent-soft)}
-</style>
+<!-- Tailwind CSS (utility classes for responsive layout) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:['selector','[data-theme="dark"]'],corePlugins:{preflight:true}}</script>
+<!-- Shared theme + components -->
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="bg-fx"></div>
-<div class="blob a"></div>
-<div class="blob b"></div>
+<div class="fx-layer"><div class="blob a"></div><div class="blob b"></div></div>
 
-<!-- ===== NAV ===== -->
+<!-- ===== NAV (shared across all pages) ===== -->
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#home" class="brand"><span class="dot"></span>Santanu<span style="color:var(--text-3);font-weight:400">.dev</span></a>
+    <a href="index.html#home" class="brand"><span class="dot"></span>Santanu<span style="color:var(--text-3);font-weight:400">.dev</span></a>
     <nav class="nav-links" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#publications">Publications</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#activities">Activities</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="publications.html">Publications</a>
+      <a href="projects.html">Projects</a>
+      <a href="education.html">Education</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
     </nav>
     <div class="nav-tools">
       <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
@@ -342,7 +56,7 @@ footer .fsoc svg{width:20px;height:20px}
     <div class="bengali-name">শান্তনু মন্ডল</div>
     <div class="role mono"><span id="typed"></span><span class="cursor"></span></div>
     <p class="lead">M.Tech in <b>Network &amp; Information Security</b> researching <b>blockchain</b>, <b>cryptography</b>, <b>IoT security</b>, <b>CBDCs</b>, and <b>Edge&nbsp;AI</b> — with a peer-reviewed publication and several manuscripts under review.</p>
-    <div class="cta-row">
+    <div class="cta-row flex flex-wrap gap-3" style="margin-bottom:28px">
       <a class="btn btn-primary" href="Santanu_Mondal_Resume.pdf" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
         Résumé
@@ -351,7 +65,7 @@ footer .fsoc svg{width:20px;height:20px}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 15V3M12 15l-4-4M12 15l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
         Download CV
       </a>
-      <a class="btn btn-ghost" href="#projects">
+      <a class="btn btn-ghost" href="projects.html">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
         Explore Work
       </a>
@@ -375,8 +89,8 @@ footer .fsoc svg{width:20px;height:20px}
 </section>
 
 <!-- ===== STATS ===== -->
-<section style="padding-top:0;padding-bottom:40px" class="reveal">
-  <div class="stats">
+<section class="section section-tight reveal" style="padding-top:0">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <div class="stat"><div class="num">8+</div><div class="lbl">Papers &amp; Preprints</div></div>
     <div class="stat"><div class="num">8</div><div class="lbl">Open-Source Projects</div></div>
     <div class="stat"><div class="num">3</div><div class="lbl">Degrees in CS &amp; Security</div></div>
@@ -385,16 +99,16 @@ footer .fsoc svg{width:20px;height:20px}
 </section>
 
 <!-- ===== ABOUT ===== -->
-<section id="about" class="reveal">
+<section class="section reveal" id="about">
   <span class="eyebrow">About</span>
   <h2 class="sec-title">Researcher at the intersection of<br>trust, cryptography &amp; systems</h2>
-  <div class="about-grid">
-    <div>
+  <div class="grid gap-10 items-start lg:grid-cols-[1.4fr_1fr]">
+    <div class="prose">
       <p>I'm <b>Santanu Mondal</b> (also known as Bitanu), from Kolkata, India. I recently completed my <b>M.Tech in Network &amp; Information Security</b> at Pondicherry University, where my thesis designed a <b>ZKP- and PUF-authenticated dual-offline CBDC protocol</b> with AML/CFT compliance for resource-constrained IoT devices.</p>
       <p>My research sits where <b>blockchain, applied cryptography, and secure systems</b> meet real-world constraints — from managing device identities on Hyperledger Fabric to zero-knowledge anonymous voting, and increasingly toward <b>Edge AI</b> and on-device inference. I've authored a peer-reviewed publication and several manuscripts currently under review.</p>
       <p>Before graduate school I worked at <b>Infosys</b> on data-pipeline validation and Teradata SQL. I'm now seeking a <b>PhD position or research role</b> where I can keep building trustworthy, privacy-preserving systems.</p>
     </div>
-    <div class="focus-card">
+    <div class="card focus-card">
       <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Research Focus</h4>
       <div class="tags">
         <span class="tag">Blockchain</span><span class="tag">Zero-Knowledge Proofs</span>
@@ -407,244 +121,36 @@ footer .fsoc svg{width:20px;height:20px}
   </div>
 </section>
 
-<!-- ===== EDUCATION ===== -->
-<section id="education" class="reveal">
-  <span class="eyebrow">Education</span>
-  <h2 class="sec-title">Academic background</h2>
-  <p class="sec-sub">A progression through computer science and information security, with a research thread running throughout.</p>
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="yr">2024 — 2026</div>
-      <h3>M.Tech, Network &amp; Information Security</h3>
-      <div class="school"><a class="ilink" href="https://www.pondiuni.edu.in/" target="_blank" rel="noopener">Pondicherry University</a> · Puducherry, India</div>
-      <div class="meta">Advisor: <a class="ilink" href="https://www.pondiuni.edu.in/faculy_profiles/dr-t-chithralekha/" target="_blank" rel="noopener">Dr. T. Chithralekha</a></div>
-      <p><span class="k">Thesis:</span> ZKP- and PUF-Authenticated Dual-Offline CBDC Protocol with AML/CFT Compliance for Resource-Constrained IoT Devices.</p>
-      <p><span class="k">Coursework:</span> Modern Cryptography, Network Security, Blockchain Technology, Distributed Systems &amp; Security, Cyber Forensics, Machine Learning, NLP, InfoSec Management &amp; Standards.</p>
-    </div>
-    <div class="tl-item">
-      <div class="yr">2021 — 2023</div>
-      <h3>M.Sc, Computer Science</h3>
-      <div class="school"><a class="ilink" href="https://sau.int/" target="_blank" rel="noopener">South Asian University</a> · New Delhi, India</div>
-      <div class="meta">A SAARC-nations university · Advisor: <a class="ilink" href="https://sau.int/faculty/shachi-sharma/" target="_blank" rel="noopener">Dr. Shachi Sharma</a></div>
-      <p><span class="k">Thesis:</span> System for Managing Multiple Identities of IoT Devices using Blockchain.</p>
-      <p><span class="k">Coursework:</span> Cryptography &amp; Network Security, Computer Networks, Advanced Data Structures &amp; Algorithms, Data Mining.</p>
-      <div class="doclinks">
-        <a class="doclink" href="https://drive.google.com/file/d/1UWa7EQp4dLUcMJDp0ZOXuhIJxTkBuPRO/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Thesis PDF</a>
-        <a class="doclink" href="https://github.com/iamsantanu21/Multiple_Identity_management_of_IoT_devices_using_blockchain" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg>Code</a>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="yr">2018 — 2021</div>
-      <h3>B.Sc (Hons.), Computer Science</h3>
-      <div class="school"><a class="ilink" href="https://asutoshcollege.in/" target="_blank" rel="noopener">Asutosh College</a>, University of Calcutta · Kolkata, India</div>
-      <p><span class="k">Project:</span> Implemented k-means and KNN machine-learning algorithms from scratch in Python.</p>
-      <div class="doclinks">
-        <a class="doclink" href="https://github.com/iamsantanu21/K-means-KNN-using-python/tree/main" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg>Code</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PUBLICATIONS ===== -->
-<section id="publications" class="reveal">
-  <span class="eyebrow">Publications</span>
-  <h2 class="sec-title">Research &amp; publications</h2>
-  <p class="sec-sub">A peer-reviewed publication plus preprints, journal submissions, and conference presentations across CBDCs, cryptography, IoT, and AI.</p>
-  <div class="filters" id="pubFilters">
-    <button class="filter active" data-f="all">All</button>
-    <button class="filter" data-f="published">Published</button>
-    <button class="filter" data-f="review">Under Review</button>
-    <button class="filter" data-f="conf">Conferences</button>
-  </div>
-  <div class="pub-list" id="pubList">
-    <div class="pub" data-cat="published">
-      <div class="idx mono">01</div>
-      <div class="body">
-        <h4>Managing Multiple Identities of IoT Devices Using Blockchain</h4>
-        <div class="authors">S. Sharma, <span class="me">S. Mondal</span>, S. Ishrat</div>
-        <div class="venue">Soft Computing and Its Engineering Applications (icSoftComp 2023), CCIS 2031, Springer · 2024</div>
-        <div class="pmeta">
-          <span class="badge published">Published</span>
-          <a class="pub-link" href="https://doi.org/10.1007/978-3-031-53728-8_11" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1.5-1.5"/></svg>DOI</a>
-        </div>
-      </div>
-    </div>
-    <div class="pub" data-cat="review">
-      <div class="idx mono">02</div>
-      <div class="body">
-        <h4>Zero-Knowledge Proof (ZKP) Authentication for Offline CBDC Payment System Using IoT Devices</h4>
-        <div class="authors"><span class="me">S. Mondal</span>, T. Chithralekha</div>
-        <div class="venue">Preprint · arXiv:2603.03804 · Under review (journal)</div>
-        <div class="pmeta">
-          <span class="badge review">Under Review</span>
-          <a class="pub-link" href="https://doi.org/10.48550/arXiv.2603.03804" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1.5-1.5"/></svg>arXiv</a>
-        </div>
-      </div>
-    </div>
-    <div class="pub" data-cat="review">
-      <div class="idx mono">03</div>
-      <div class="body">
-        <h4>A Systematic Literature Survey of Cryptocurrencies</h4>
-        <div class="authors"><span class="me">S. Mondal</span>, T. Chithralekha</div>
-        <div class="venue">Preprint · SSRN 6290118 · Under review (journal)</div>
-        <div class="pmeta">
-          <span class="badge review">Under Review</span>
-          <a class="pub-link" href="http://dx.doi.org/10.2139/ssrn.6290118" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1.5-1.5"/></svg>SSRN</a>
-        </div>
-      </div>
-    </div>
-    <div class="pub" data-cat="conf">
-      <div class="idx mono">04</div>
-      <div class="body">
-        <h4>NLP-Based Browser Extension for Real-Time Malicious URL and Domain Detection</h4>
-        <div class="authors"><span class="me">S. Mondal</span>, A. Paswan</div>
-        <div class="venue">Presented at ICCET 2026 · Under review (journal)</div>
-        <div class="pmeta"><span class="badge conf">Conference</span><span class="badge review">Under Review</span></div>
-      </div>
-    </div>
-    <div class="pub" data-cat="review">
-      <div class="idx mono">05</div>
-      <div class="body">
-        <h4>A Systematic Literature Review of Central Bank Digital Currencies (CBDCs): Socio-Economic Impact, Governance, and Global Adoption</h4>
-        <div class="authors"><span class="me">S. Mondal</span>, T. Chithralekha</div>
-        <div class="venue">Under review</div>
-        <div class="pmeta"><span class="badge review">Under Review</span></div>
-      </div>
-    </div>
-    <div class="pub" data-cat="review">
-      <div class="idx mono">06</div>
-      <div class="body">
-        <h4>Technical Design Choices of Central Bank Digital Currencies (CBDCs): A Survey on Architecture, Ledger Technologies, and Consensus Mechanisms</h4>
-        <div class="authors"><span class="me">S. Mondal</span>, T. Chithralekha</div>
-        <div class="venue">Under review</div>
-        <div class="pmeta"><span class="badge review">Under Review</span></div>
-      </div>
-    </div>
-    <div class="pub" data-cat="conf">
-      <div class="idx mono">07</div>
-      <div class="body">
-        <h4>Revolutionizing Distance Learning: AI-Driven Personalization for the Next-Gen Education System</h4>
-        <div class="authors"><span class="me">S. Mondal</span>, A. Paswan</div>
-        <div class="venue">National Conference on Institutional Collaboration, Pondicherry University &amp; Loyola College Society, Chennai</div>
-        <div class="pmeta"><span class="badge conf">Conference</span></div>
-      </div>
-    </div>
-    <div class="pub" data-cat="review">
-      <div class="idx mono">08</div>
-      <div class="body">
-        <h4>ZKP- and PUF-Authenticated Dual-Offline CBDC Protocol with AML/CFT Compliance for Resource-Constrained IoT Devices</h4>
-        <div class="authors"><span class="me">S. Mondal</span>, T. Chithralekha</div>
-        <div class="venue">Manuscript in preparation (M.Tech thesis)</div>
-        <div class="pmeta"><span class="badge review">In Preparation</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PROJECTS ===== -->
-<section id="projects" class="reveal">
-  <span class="eyebrow">Projects</span>
-  <h2 class="sec-title">Selected work</h2>
-  <p class="sec-sub">Open-source projects spanning blockchain, zero-knowledge cryptography, Edge AI, ML security, and distributed systems.</p>
-  <div class="proj-grid">
-
-    <div class="proj">
-      <div class="proj-top">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4a3 3 0 013 3v4.5"/></svg></div>
-        <a class="gh" href="https://github.com/iamsantanu21/Multiple_Identity_management_of_IoT_devices_using_blockchain" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
-      </div>
-      <div class="kicker">Blockchain · Thesis</div>
-      <h3>Multiple Identity Management of IoT Devices</h3>
-      <p>A Hyperledger Fabric permissioned-blockchain system for managing multiple IoT device identities. JavaScript chaincode for identity registration and asset transfer, a Fabric Gateway SDK client, and network monitoring via Hyperledger Explorer.</p>
-      <div class="stack"><span>Hyperledger Fabric</span><span>Chaincode</span><span>Gateway SDK</span></div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <a class="gh" href="https://github.com/iamsantanu21/One-Human-One-Vote" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
-      </div>
-      <div class="kicker">ZK Cryptography · Hackathon</div>
-      <h3>One-Human-One-Vote</h3>
-      <p>A privacy-preserving, decentralized voting dApp built at the IIT Madras (CyStar) Winter School Hackathon. Solidity smart contracts with Merkle-tree eligibility commitments, zero-knowledge membership proofs, and nullifiers guaranteeing anonymity without linking votes to voters.</p>
-      <div class="stack"><span>Solidity</span><span>Zero-Knowledge</span><span>Merkle Trees</span></div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7z"/></svg></div>
-        <a class="gh" href="https://github.com/iamsantanu21/Decentralized-Voting-DApp" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
-      </div>
-      <div class="kicker">Ethereum · Smart Contracts</div>
-      <h3>Decentralized Voting DApp</h3>
-      <p>An Ethereum voting smart contract (Solidity, Hardhat, Ethers.js) supporting multiple time-bound elections, one-vote-per-address enforcement, and real-time tallying — deployed and verified on the Sepolia testnet via Alchemy RPC with event logging and admin access controls.</p>
-      <div class="stack"><span>Solidity</span><span>Hardhat</span><span>Ethers.js</span><span>Sepolia</span></div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><path d="M5.6 5.6l2 2M16.4 16.4l2 2M18.4 5.6l-2 2M7.6 16.4l-2 2"/></svg></div>
-        <a class="gh" href="https://github.com/iamsantanu21/MalURLX" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
-      </div>
-      <div class="kicker">ML Security · NLP</div>
-      <h3>MalURLX — Malicious URL Detection</h3>
-      <p>An end-to-end ML system detecting malicious URLs from lexical and character-level TF-IDF features with a LightGBM classifier (~95–98% accuracy), served through a FastAPI/Uvicorn REST API and shipped with a companion Chrome extension for real-time browser protection.</p>
-      <div class="stack"><span>LightGBM</span><span>TF-IDF</span><span>FastAPI</span><span>Chrome Ext.</span></div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2"/></svg></div>
-        <a class="gh" href="https://github.com/iamsantanu21/ACM-Winter-School-EdgeAI-Hackathon" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
-      </div>
-      <div class="kicker">Edge AI · Accessibility</div>
-      <h3>Third Eye — Assistive Navigation</h3>
-      <p>A fully on-device wearable navigation aid for visually impaired users on the Arduino Nicla Vision (ACM Winter School Edge AI Hackathon, IISc). Fuses ToF distance sensing and IMU-based fall detection with an INT8-quantized vision model (10× smaller, 0.80 accuracy), streaming real-time alerts over UDP to a Flutter/Streamlit UI.</p>
-      <div class="stack"><span>Arduino Nicla</span><span>INT8 Quant.</span><span>ToF + IMU</span><span>Flutter</span></div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10a6 6 0 00-11.5-2A4.5 4.5 0 006 17h11a4 4 0 001-7z"/></svg></div>
-        <a class="gh" href="https://github.com/iamsantanu21/Alumni-Management-System-on-AWS" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
-      </div>
-      <div class="kicker">Cloud · LAMP</div>
-      <h3>Alumni Management System on AWS</h3>
-      <p>A PHP/MySQL (LAMP) web application deployed on an AWS EC2 Ubuntu instance — configured security groups and SSH access, and managed provisioning and database import via PuTTY, FileZilla, and phpMyAdmin.</p>
-      <div class="stack"><span>AWS EC2</span><span>PHP/MySQL</span><span>LAMP</span></div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg></div>
-        <a class="gh" href="https://github.com/iamsantanu21/Remote-Desktop" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
-      </div>
-      <div class="kicker">Networking · Systems</div>
-      <h3>Remote Desktop — Screen Sharing</h3>
-      <p>A Python remote-desktop tool that streams a host's screen and relays remote mouse/keyboard control. Captured JPEG-encoded frames with OpenCV, evolved the transport from TCP to TLS-secured chunked UDP streaming (~20 FPS), and replayed input events with pynput across multi-threaded clients.</p>
-      <div class="stack"><span>Python</span><span>OpenCV</span><span>UDP/TLS</span><span>pynput</span></div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M5 8v3a2 2 0 002 2h10a2 2 0 002-2V8M12 13v3"/></svg></div>
-        <a class="gh" href="https://github.com/iamsantanu21/Distributed-Systems-LAB" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
-      </div>
-      <div class="kicker">Distributed Computing</div>
-      <h3>Distributed Systems Lab</h3>
-      <p>A suite of distributed-computing programs — Java RMI chat and client-server apps, DNS resolution, IP multicast, distributed image processing, and a distributed number generator — demonstrating remote invocation, group communication, and parallel computing.</p>
-      <div class="stack"><span>Java RMI</span><span>Multicast</span><span>Parallel</span></div>
-    </div>
-
+<!-- ===== EXPLORE (links to sub-pages) ===== -->
+<section class="section reveal" style="padding-top:0">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <a class="proj" href="publications.html">
+      <div class="proj-top"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div></div>
+      <div class="kicker">8+ items</div><h3>Publications</h3>
+      <p>Peer-reviewed paper, preprints, journal submissions &amp; conference presentations on CBDCs, cryptography, IoT and AI.</p>
+      <span class="doclink" style="align-self:flex-start">View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="proj" href="projects.html">
+      <div class="proj-top"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div></div>
+      <div class="kicker">8 projects</div><h3>Projects</h3>
+      <p>Open-source work across blockchain, zero-knowledge cryptography, Edge AI, ML security and distributed systems.</p>
+      <span class="doclink" style="align-self:flex-start">View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="proj" href="education.html">
+      <div class="proj-top"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/></svg></div></div>
+      <div class="kicker">Degrees &amp; more</div><h3>Education</h3>
+      <p>Academic background, theses and advisors, plus schools, hackathons and conferences at IITs, IISc and beyond.</p>
+      <span class="doclink" style="align-self:flex-start">View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
 </section>
 
 <!-- ===== SKILLS ===== -->
-<section id="skills" class="reveal">
+<section class="section reveal" id="skills">
   <span class="eyebrow">Skills</span>
   <h2 class="sec-title">Technical toolkit</h2>
   <p class="sec-sub">The languages, systems, and domains I work across in research and engineering.</p>
-  <div class="skills-grid">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <div class="skill-cat">
       <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>Programming</h4>
       <div class="tags"><span class="tag">Python</span><span class="tag">C</span><span class="tag">Solidity</span><span class="tag">JavaScript</span><span class="tag">Java</span></div>
@@ -672,28 +178,13 @@ footer .fsoc svg{width:20px;height:20px}
   </div>
 </section>
 
-<!-- ===== ACTIVITIES ===== -->
-<section id="activities" class="reveal">
-  <span class="eyebrow">Beyond Research</span>
-  <h2 class="sec-title">Schools, conferences &amp; training</h2>
-  <p class="sec-sub">Selected academic activities, hackathons, and specialized schools at IITs, IISc, and beyond.</p>
-  <div class="act-grid">
-    <div class="act"><div class="at"><span>ACM Winter School on Edge AI</span><span>Jan 2026</span></div><h4>IISc Bangalore</h4><p>Intensive training on Edge AI, TinyML, embedded AI, and IoT systems.</p><a class="cert" href="https://drive.google.com/file/d/1tbjBjvZ97NUJW-YG_r0NwPHv2JiNr4KW/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>Winter School — Decentralized Trust &amp; Blockchains</span><span>Dec 2025</span></div><h4>IIT Madras (CyStar)</h4><p>Focused on blockchain technologies, cryptography, and distributed systems.</p><a class="cert" href="https://drive.google.com/file/d/1j4eJod2k8tvasYO_kUDhtK7fMin5H4ft/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>Paper Presentation · ICCET 2026</span><span>Mar 2026</span></div><h4>International Conference</h4><p>Cognitive Informatics Engineering &amp; Technology, Tiruchengode, Tamil Nadu.</p><a class="cert" href="https://drive.google.com/file/d/11CzMaGVDzBRRkfWrpqB_BCSYpQ2FtIZ3/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>Paper Presentation · National Conference</span><span>Apr 2025</span></div><h4>Pondicherry University &amp; Loyola College</h4><p>Institutional collaboration for transforming distance education.</p><a class="cert" href="https://drive.google.com/file/d/1j9sq66SSxEf4UwNSmdEkz49ia6YLZA4g/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>Paper Presentation · icSoftComp</span><span>Dec 2023</span></div><h4>5th Intl. Conf. on Soft Computing</h4><p>Soft Computing and its Engineering Applications.</p><a class="cert" href="https://drive.google.com/file/d/1-x-ef4wS1KcKNnLjhbYBnGzW8P5xQr5J/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>ACM Summer School</span><span>Jul 2022</span></div><h4>IIIT Delhi</h4><p>Training on geometric modelling and computational methods.</p><a class="cert" href="https://drive.google.com/file/d/15ZHp8pplIxlIg-cmroosHhBSr4hV6xS6/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-  </div>
-</section>
-
 <!-- ===== CONTACT ===== -->
-<section id="contact" class="contact reveal">
+<section class="section reveal" id="contact">
   <div class="contact-card">
     <span class="eyebrow" style="justify-content:center">Get in touch</span>
     <h2>Let's build something<br>trustworthy together.</h2>
     <p>I'm open to PhD positions, research collaborations, and roles in security, blockchain, and Edge AI. Feel free to reach out.</p>
-    <div class="cta-row">
+    <div class="cta-row flex flex-wrap gap-3 justify-center">
       <a class="btn btn-primary" href="mailto:iamsantanu21@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
         Email Me
@@ -711,7 +202,7 @@ footer .fsoc svg{width:20px;height:20px}
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- ===== FOOTER (shared) ===== -->
 <footer>
   <div class="fsoc">
     <a href="https://github.com/iamsantanu21" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
@@ -719,43 +210,13 @@ footer .fsoc svg{width:20px;height:20px}
     <a href="https://scholar.google.com/citations?user=8stzW6gAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.9V17h2V9zM5 13.2v3.2c0 1.7 3.1 3.6 7 3.6s7-1.9 7-3.6v-3.2l-7 3.8z"/></svg></a>
     <a href="https://orcid.org/0009-0001-6243-1709" target="_blank" rel="noopener" aria-label="ORCID"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0a12 12 0 100 24 12 12 0 000-24zM7.4 18H5.6V8.1h1.8V18zM6.5 6.8a1.05 1.05 0 110-2.1 1.05 1.05 0 010 2.1zM18.4 13.4c0 2.8-1.8 4.6-4.6 4.6H9.9V8.1h3.9c2.8 0 4.6 1.8 4.6 5.3zm-1.9 0c0-2.5-1.2-3.6-3-3.6h-1.8v6.5h1.8c1.6 0 3-1 3-2.9z"/></svg></a>
   </div>
-  <div>© <span id="year"></span> Santanu Mondal · Built with care &amp; hosted on GitHub Pages</div>
+  <div>© <span id="year"></span> Santanu Mondal · শান্তনু মন্ডল · Hosted on GitHub Pages</div>
 </footer>
 
+<!-- page-specific: typing effect -->
 <script>
-/* ===== THEME ===== */
 (function(){
-  var root=document.documentElement, btn=document.getElementById('themeBtn');
-  var sun=document.getElementById('sunIcon'), moon=document.getElementById('moonIcon');
-  var saved=null; try{saved=localStorage.getItem('theme')}catch(e){}
-  var start = saved || 'light';
-  setTheme(start);
-  function setTheme(t){
-    root.setAttribute('data-theme',t);
-    sun.style.display = t==='dark'?'none':'block';
-    moon.style.display = t==='dark'?'block':'none';
-    try{localStorage.setItem('theme',t)}catch(e){}
-  }
-  btn.addEventListener('click',function(){
-    setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
-  });
-})();
-
-/* ===== NAV scroll + mobile ===== */
-(function(){
-  var nav=document.getElementById('nav');
-  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>30)});
-  var mb=document.getElementById('menuBtn'), nl=document.getElementById('navLinks');
-  mb.addEventListener('click',function(){nl.classList.toggle('open')});
-  nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.classList.remove('open')})});
-})();
-
-/* ===== YEAR ===== */
-document.getElementById('year').textContent=new Date().getFullYear();
-
-/* ===== TYPING ===== */
-(function(){
-  var el=document.getElementById('typed');
+  var el=document.getElementById('typed'); if(!el) return;
   var words=['Security Researcher','Blockchain Engineer','Cryptography Enthusiast','Edge AI Explorer','PhD Aspirant'];
   var wi=0,ci=0,del=false;
   function tick(){
@@ -768,31 +229,7 @@ document.getElementById('year').textContent=new Date().getFullYear();
   }
   tick();
 })();
-
-/* ===== PUBLICATION FILTERS ===== */
-(function(){
-  var btns=document.querySelectorAll('#pubFilters .filter');
-  var pubs=document.querySelectorAll('#pubList .pub');
-  btns.forEach(function(b){
-    b.addEventListener('click',function(){
-      btns.forEach(function(x){x.classList.remove('active')});
-      b.classList.add('active');
-      var f=b.dataset.f;
-      pubs.forEach(function(p){
-        var show = f==='all' || p.dataset.cat===f;
-        p.style.display = show?'flex':'none';
-      });
-    });
-  });
-})();
-
-/* ===== REVEAL ON SCROLL ===== */
-(function(){
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
-  },{threshold:0.12});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
-})();
 </script>
+<script src="app.js"></script>
 </body>
 </html>
