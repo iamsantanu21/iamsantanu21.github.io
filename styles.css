@@ -372,3 +372,11 @@ footer .fsoc svg{width:20px;height:20px}
 /* gentle glow pulse on the hero portrait ring */
 @keyframes ringGlow{0%,100%{box-shadow:0 30px 80px var(--glow)}50%{box-shadow:0 30px 110px var(--glow)}}
 .portrait-ring{animation:spin 14s linear infinite, ringGlow 5s ease-in-out infinite}
+
+/* ---------- Phone-only: shrink hero portrait + orbit so chips never clip ---------- */
+@media(max-width:640px){
+  .portrait-wrap{max-width:300px;margin-top:26px;--orbit-r:calc(min(118px,31vw) + 4px)}
+  .portrait-ring{width:min(206px,55vw)}
+  .chip{font-size:.74rem;padding:7px 10px}
+  .chip svg{width:14px;height:14px}
+}
