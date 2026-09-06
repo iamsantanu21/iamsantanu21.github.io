@@ -144,9 +144,9 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .3s eas
   display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid transparent;transition:gap .2s,border-color .2s}
 .viewall:hover{gap:10px;border-bottom-color:var(--accent)}
 .viewall svg{width:14px;height:14px}
-/* fallback grid so the highlights panel stays 3-up even without Tailwind */
-#explore .grid{display:grid;grid-template-columns:1fr;gap:20px}
-@media(min-width:768px){#explore .grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* fallback grid so the projects preview stays 3-up even without Tailwind */
+#proj-preview .grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:768px){#proj-preview .grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:960px){.dots{display:none}}
 
 /* ---------- Hero ---------- */

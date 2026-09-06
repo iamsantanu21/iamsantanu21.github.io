@@ -53,9 +53,11 @@
 <nav class="dots" id="dots" aria-label="Section navigation">
   <a href="#home" aria-label="Home"><span class="dlabel"><span class="dnum">01</span>Home</span></a>
   <a href="#about" aria-label="About"><span class="dlabel"><span class="dnum">02</span>About</span></a>
-  <a href="#explore" aria-label="Explore"><span class="dlabel"><span class="dnum">03</span>Explore</span></a>
-  <a href="#skills" aria-label="Skills"><span class="dlabel"><span class="dnum">04</span>Skills</span></a>
-  <a href="#contact" aria-label="Contact"><span class="dlabel"><span class="dnum">05</span>Contact</span></a>
+  <a href="#pub-preview" aria-label="Publications"><span class="dlabel"><span class="dnum">03</span>Publications</span></a>
+  <a href="#proj-preview" aria-label="Projects"><span class="dlabel"><span class="dnum">04</span>Projects</span></a>
+  <a href="#edu-preview" aria-label="Education"><span class="dlabel"><span class="dnum">05</span>Education</span></a>
+  <a href="#skills" aria-label="Skills"><span class="dlabel"><span class="dnum">06</span>Skills</span></a>
+  <a href="#contact" aria-label="Contact"><span class="dlabel"><span class="dnum">07</span>Contact</span></a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -123,47 +125,117 @@
   </div>
 </section>
 
-<!-- ===== HIGHLIGHTS (preview + view all) ===== -->
-<section class="section reveal" id="explore">
-  <span class="eyebrow">Explore</span>
-  <h2 class="sec-title">A quick look</h2>
-  <p class="sec-sub">A few highlights from each area — open any of them for the full list.</p>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-    <div class="proj">
-      <div class="proj-top"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div></div>
-      <div class="kicker">Publications</div>
-      <ul class="mini">
-        <li>Managing Multiple Identities of IoT Devices Using Blockchain <b>· Springer 2024</b></li>
-        <li>ZKP Authentication for Offline CBDC Payments <b>· arXiv</b></li>
-        <li>A Systematic Literature Survey of Cryptocurrencies <b>· SSRN</b></li>
-      </ul>
-      <a class="viewall" href="publications.html">View all 8+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<!-- ===== PUBLICATIONS (preview frame) ===== -->
+<section class="section reveal" id="pub-preview">
+  <span class="eyebrow">Publications</span>
+  <h2 class="sec-title">Research &amp; publications</h2>
+  <div class="pub-list">
+    <div class="pub">
+      <div class="idx mono">01</div>
+      <div class="body">
+        <h4>Managing Multiple Identities of IoT Devices Using Blockchain</h4>
+        <div class="authors">S. Sharma, <span class="me">S. Mondal</span>, S. Ishrat</div>
+        <div class="venue">icSoftComp 2023, CCIS 2031, Springer · 2024</div>
+        <div class="pmeta"><span class="badge published">Published</span>
+          <a class="pub-link" href="https://doi.org/10.1007/978-3-031-53728-8_11" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1.5-1.5"/></svg>DOI</a></div>
+      </div>
     </div>
-
-    <div class="proj">
-      <div class="proj-top"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div></div>
-      <div class="kicker">Projects</div>
-      <ul class="mini">
-        <li>Multiple Identity Management of IoT Devices <b>· Hyperledger</b></li>
-        <li>One-Human-One-Vote <b>· ZK Voting</b></li>
-        <li>MalURLX — Malicious URL Detection <b>· ML</b></li>
-      </ul>
-      <a class="viewall" href="projects.html">View all 8 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="pub">
+      <div class="idx mono">02</div>
+      <div class="body">
+        <h4>Zero-Knowledge Proof (ZKP) Authentication for Offline CBDC Payment System Using IoT Devices</h4>
+        <div class="authors"><span class="me">S. Mondal</span>, T. Chithralekha</div>
+        <div class="venue">Preprint · arXiv:2603.03804 · Under review</div>
+        <div class="pmeta"><span class="badge review">Under Review</span>
+          <a class="pub-link" href="https://doi.org/10.48550/arXiv.2603.03804" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1.5-1.5"/></svg>arXiv</a></div>
+      </div>
     </div>
-
-    <div class="proj">
-      <div class="proj-top"><div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/></svg></div></div>
-      <div class="kicker">Education</div>
-      <ul class="mini">
-        <li>M.Tech, Network &amp; Information Security <b>· Pondicherry, 2026</b></li>
-        <li>M.Sc, Computer Science <b>· SAU, 2023</b></li>
-        <li>B.Sc (Hons.), Computer Science <b>· Calcutta, 2021</b></li>
-      </ul>
-      <a class="viewall" href="education.html">View all <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="pub">
+      <div class="idx mono">03</div>
+      <div class="body">
+        <h4>A Systematic Literature Survey of Cryptocurrencies</h4>
+        <div class="authors"><span class="me">S. Mondal</span>, T. Chithralekha</div>
+        <div class="venue">Preprint · SSRN 6290118 · Under review</div>
+        <div class="pmeta"><span class="badge review">Under Review</span>
+          <a class="pub-link" href="http://dx.doi.org/10.2139/ssrn.6290118" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1.5-1.5"/></svg>SSRN</a></div>
+      </div>
     </div>
-
   </div>
+  <a class="btn btn-ghost" href="publications.html" style="align-self:flex-start;margin-top:22px">
+    Show all 8+ publications
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</section>
+
+<!-- ===== PROJECTS (preview frame) ===== -->
+<section class="section reveal" id="proj-preview">
+  <span class="eyebrow">Projects</span>
+  <h2 class="sec-title">Selected work</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4a3 3 0 013 3v4.5"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/Multiple_Identity_management_of_IoT_devices_using_blockchain" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">Blockchain · Thesis</div>
+      <h3>Multiple Identity Management of IoT Devices</h3>
+      <p>A Hyperledger Fabric permissioned-blockchain system for managing multiple IoT device identities with JavaScript chaincode and a Gateway SDK client.</p>
+      <div class="stack"><span>Hyperledger</span><span>Chaincode</span></div>
+    </div>
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/One-Human-One-Vote" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">ZK Cryptography · Hackathon</div>
+      <h3>One-Human-One-Vote</h3>
+      <p>A privacy-preserving voting dApp (IIT Madras CyStar) with Merkle-tree eligibility, zero-knowledge membership proofs and nullifiers for anonymity.</p>
+      <div class="stack"><span>Solidity</span><span>Zero-Knowledge</span></div>
+    </div>
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5.6 5.6l2 2M16.4 16.4l2 2M18.4 5.6l-2 2M7.6 16.4l-2 2"/></svg></div>
+        <a class="gh" href="https://github.com/iamsantanu21/MalURLX" target="_blank" rel="noopener" aria-label="GitHub repo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+      <div class="kicker">ML Security · NLP</div>
+      <h3>MalURLX — Malicious URL Detection</h3>
+      <p>An end-to-end ML system detecting malicious URLs with a LightGBM classifier (~95–98%), served via FastAPI with a companion Chrome extension.</p>
+      <div class="stack"><span>LightGBM</span><span>FastAPI</span></div>
+    </div>
+  </div>
+  <a class="btn btn-ghost" href="projects.html" style="align-self:flex-start;margin-top:22px">
+    Show all 8 projects
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</section>
+
+<!-- ===== EDUCATION (preview frame) ===== -->
+<section class="section reveal" id="edu-preview">
+  <span class="eyebrow">Education</span>
+  <h2 class="sec-title">Academic background</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="yr">2024 — 2026</div>
+      <h3>M.Tech, Network &amp; Information Security</h3>
+      <div class="school">Pondicherry University · Puducherry, India</div>
+      <div class="meta">Advisor: Dr. T. Chithralekha</div>
+    </div>
+    <div class="tl-item">
+      <div class="yr">2021 — 2023</div>
+      <h3>M.Sc, Computer Science</h3>
+      <div class="school">South Asian University · New Delhi, India</div>
+      <div class="meta">Advisor: Dr. Shachi Sharma</div>
+    </div>
+    <div class="tl-item">
+      <div class="yr">2018 — 2021</div>
+      <h3>B.Sc (Hons.), Computer Science</h3>
+      <div class="school">Asutosh College, University of Calcutta · Kolkata, India</div>
+    </div>
+  </div>
+  <a class="btn btn-ghost" href="education.html" style="align-self:flex-start;margin-top:22px">
+    Theses, schools &amp; certificates
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
 </section>
 
 <!-- ===== SKILLS ===== -->
