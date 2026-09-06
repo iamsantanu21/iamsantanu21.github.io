@@ -155,13 +155,13 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .3s eas
 .chip .ci{color:var(--accent)}.chip svg{width:16px;height:16px}
 .orbit{position:absolute;top:50%;left:50%;width:calc(var(--orbit-r)*2);height:calc(var(--orbit-r)*2);
   margin-left:calc(var(--orbit-r)*-1);margin-top:calc(var(--orbit-r)*-1);border-radius:50%;
-  animation:orbit-spin 48s linear infinite;z-index:4;pointer-events:none}
+  animation:orbit-spin 120s linear infinite;z-index:4;pointer-events:none}
 .orbit .sat{position:absolute;top:50%;left:50%;width:0;height:0}
 .orbit .sat.s1{margin-top:calc(var(--orbit-r)*-1)}   /* top */
 .orbit .sat.s2{margin-left:var(--orbit-r)}            /* right */
 .orbit .sat.s3{margin-top:var(--orbit-r)}             /* bottom */
 .orbit .sat.s4{margin-left:calc(var(--orbit-r)*-1)}   /* left */
-.orbit .chip{position:absolute;top:0;left:0;animation:chip-upright 48s linear infinite}
+.orbit .chip{position:absolute;top:0;left:0;animation:chip-upright 120s linear infinite}
 @keyframes orbit-spin{to{transform:rotate(360deg)}}
 @keyframes chip-upright{
   0%{transform:translate(-50%,-50%) rotate(0deg) scale(1)}
