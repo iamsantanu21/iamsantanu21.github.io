@@ -109,6 +109,18 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .3s eas
 .btn-ghost{background:var(--surface-solid);border-color:var(--border-strong);color:var(--text)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
 
+/* ---------- Section dots (scroll position indicator) ---------- */
+.dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:16px;align-items:flex-end}
+.dots a{position:relative;width:12px;height:12px;border-radius:50%;border:2px solid var(--text-3);background:transparent;transition:all .3s;display:block}
+.dots a:hover{border-color:var(--accent);transform:scale(1.15)}
+.dots a.active{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.dots a .dlabel{position:absolute;right:24px;top:50%;transform:translateY(-50%) translateX(8px);opacity:0;pointer-events:none;
+  background:var(--surface-solid);border:1px solid var(--border);border-radius:9px;padding:5px 11px;font-size:.74rem;font-weight:600;
+  white-space:nowrap;box-shadow:var(--shadow);transition:all .25s;color:var(--text);display:flex;align-items:center;gap:7px}
+.dots a .dlabel .dnum{font-family:'JetBrains Mono';font-size:.68rem;color:var(--accent)}
+.dots a:hover .dlabel,.dots a.active .dlabel{opacity:1;transform:translateY(-50%) translateX(0)}
+@media(max-width:960px){.dots{display:none}}
+
 /* ---------- Hero ---------- */
 .hero{min-height:100svh;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(30px,5vw,50px);
   max-width:var(--maxw);margin-inline:auto;

@@ -45,3 +45,19 @@
   },{threshold:0.12});
   els.forEach(function(el){io.observe(el)});
 })();
+
+/* ---- Section dots: highlight the section you're currently in ---- */
+(function(){
+  var dots=document.querySelectorAll('.dots a');
+  if(!dots.length || !('IntersectionObserver' in window)) return;
+  var targets=[];
+  dots.forEach(function(a){
+    var t=document.querySelector(a.getAttribute('href'));
+    if(t){t.__dot=a;targets.push(t);}
+  });
+  function activate(a){dots.forEach(function(d){d.classList.toggle('active',d===a);});}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting && e.target.__dot) activate(e.target.__dot); });
+  },{rootMargin:'-45% 0px -45% 0px',threshold:0});
+  targets.forEach(function(t){io.observe(t);});
+})();
