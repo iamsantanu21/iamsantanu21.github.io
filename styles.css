@@ -373,6 +373,9 @@ footer .fsoc svg{width:20px;height:20px}
 @keyframes ringGlow{0%,100%{box-shadow:0 30px 80px var(--glow)}50%{box-shadow:0 30px 110px var(--glow)}}
 .portrait-ring{animation:spin 14s linear infinite, ringGlow 5s ease-in-out infinite}
 
+/* ---------- Static single (English-only) name ---------- */
+.name-en.name-solo{position:static;height:auto;display:block;animation:none;opacity:1;transform:none;margin:0 0 14px}
+
 /* ---------- Mobile & tablet: show photo ABOVE the name/text ---------- */
 @media(max-width:900px){
   body.snap .hero{display:flex}
