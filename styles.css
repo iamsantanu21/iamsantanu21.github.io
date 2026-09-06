@@ -31,7 +31,9 @@
 }
 
 /* ---------- Base ---------- */
-html{scroll-behavior:smooth;overflow-x:clip}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-snap-type:y proximity;scroll-padding-top:82px}
+/* each major block gently snaps to the top as you scroll */
+.hero,.section,.page-hero{scroll-snap-align:start;scroll-snap-stop:normal}
 body{
   background:var(--bg); color:var(--text);
   font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
