@@ -145,9 +145,9 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .3s eas
   display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid transparent;transition:gap .2s,border-color .2s}
 .viewall:hover{gap:10px;border-bottom-color:var(--accent)}
 .viewall svg{width:14px;height:14px}
-/* fallback grid so the projects preview stays 3-up even without Tailwind */
-#proj-preview .grid{display:grid;grid-template-columns:1fr;gap:20px}
-@media(min-width:768px){#proj-preview .grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* fallback grid so the projects & activities previews stay 3-up even without Tailwind */
+#proj-preview .grid,#act-preview .grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:768px){#proj-preview .grid,#act-preview .grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:960px){.dots{display:none}}
 
 /* ---------- Hero ---------- */
@@ -353,3 +353,22 @@ footer .fsoc svg{width:20px;height:20px}
   .name-rotator{height:auto}.name-rotator .name-en,.name-rotator .name-bn{position:static;opacity:1;height:auto}
   html{scroll-behavior:auto}
 }
+
+/* ---------- Colour & motion polish ---------- */
+.sec-title{position:relative}
+.sec-title::after{content:"";display:block;width:56px;height:4px;margin-top:14px;border-radius:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 16px var(--glow)}
+/* animated shimmer on gradient words (name, section accents) */
+.grad{background-size:200% auto;animation:gradShift 7s ease infinite}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+/* livelier cards */
+.proj-icon{transition:transform .3s ease}
+.proj:hover .proj-icon{transform:scale(1.08) rotate(-4deg)}
+.pub:hover,.act:hover,.skill-cat:hover{box-shadow:0 14px 36px var(--glow)}
+.skill-cat h4 svg,.focus-card h4 svg{transition:transform .3s ease}
+.skill-cat:hover h4 svg,.focus-card:hover h4 svg{transform:scale(1.15) rotate(6deg)}
+.tag{transition:background .2s ease,border-color .2s ease,color .2s ease}
+.skill-cat:hover .tag{border-color:var(--accent)}
+/* gentle glow pulse on the hero portrait ring */
+@keyframes ringGlow{0%,100%{box-shadow:0 30px 80px var(--glow)}50%{box-shadow:0 30px 110px var(--glow)}}
+.portrait-ring{animation:spin 14s linear infinite, ringGlow 5s ease-in-out infinite}

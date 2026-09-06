@@ -63,7 +63,7 @@
     c.style.width=w+'px'; c.style.height=h+'px';
     c.width=Math.round(w*dpr); c.height=Math.round(h*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    var target=Math.min(170, Math.max(45, Math.floor(w*h/9000)));
+    var target=Math.min(120, Math.max(30, Math.floor(w*h/13000)));
     parts=[];
     for(var i=0;i<target;i++){parts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*0.45,vy:(Math.random()-.5)*0.45});}
   }
@@ -72,7 +72,7 @@
     frame++;
     if(frame%30===0) rgb=accentRgb(); // pick up theme changes
     ctx.clearRect(0,0,w,h);
-    var D=150, DM=230, r0=rgb[0],r1=rgb[1],r2=rgb[2];
+    var D=135, DM=210, r0=rgb[0],r1=rgb[1],r2=rgb[2];
     for(var i=0;i<parts.length;i++){
       var p=parts[i];
       p.x+=p.vx; p.y+=p.vy;
@@ -80,18 +80,18 @@
       if(p.y<0||p.y>h) p.vy*=-1;
       var dxm=p.x-mouse.x, dym=p.y-mouse.y, dm=Math.sqrt(dxm*dxm+dym*dym);
       if(dm<DM){
-        ctx.strokeStyle='rgba('+r0+','+r1+','+r2+','+(0.6*(1-dm/DM))+')';
-        ctx.lineWidth=1.4; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
+        ctx.strokeStyle='rgba('+r0+','+r1+','+r2+','+(0.55*(1-dm/DM))+')';
+        ctx.lineWidth=1.1; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
       }
       for(var j=i+1;j<parts.length;j++){
         var q=parts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy);
         if(d<D){
-          ctx.strokeStyle='rgba('+r0+','+r1+','+r2+','+(0.34*(1-d/D))+')';
-          ctx.lineWidth=1.2; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+          ctx.strokeStyle='rgba('+r0+','+r1+','+r2+','+(0.20*(1-d/D))+')';
+          ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
         }
       }
-      ctx.fillStyle='rgba('+r0+','+r1+','+r2+',0.9)';
-      ctx.beginPath(); ctx.arc(p.x,p.y,2,0,6.2832); ctx.fill();
+      ctx.fillStyle='rgba('+r0+','+r1+','+r2+',0.65)';
+      ctx.beginPath(); ctx.arc(p.x,p.y,1.6,0,6.2832); ctx.fill();
     }
     requestAnimationFrame(loop);
   }
