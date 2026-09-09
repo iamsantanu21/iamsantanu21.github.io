@@ -378,11 +378,12 @@ footer .fsoc svg{width:20px;height:20px}
 
 /* ---------- Photo carousel (home) ---------- */
 .carousel{position:relative;display:flex;align-items:center;gap:10px;margin-top:8px}
-.car-viewport{overflow:hidden;flex:1;border-radius:18px}
-.carousel.marquee .car-viewport{-webkit-mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.car-viewport{flex:1;border-radius:18px;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;-ms-overflow-style:none;scrollbar-width:none}
+.car-viewport::-webkit-scrollbar{display:none}
 /* full photo, no crop: fixed height, width follows each image's natural shape */
-.carousel.marquee .car-slide{cursor:pointer;width:auto;aspect-ratio:auto;height:clamp(190px,26vw,270px)}
-.carousel.marquee .car-slide img{width:auto;height:100%;object-fit:contain}
+.car-slide{scroll-snap-align:center;width:auto;aspect-ratio:auto;height:clamp(190px,26vw,270px)}
+.car-slide img{width:auto;height:100%;object-fit:contain}
 .car-track{display:flex;gap:16px;will-change:transform;transition:transform .55s cubic-bezier(.22,.61,.36,1)}
 .car-slide{flex:0 0 auto;width:min(360px,80%);aspect-ratio:3/2;border-radius:16px;overflow:hidden;
   border:1px solid var(--border);background:var(--bg-3);cursor:zoom-in;position:relative;box-shadow:var(--shadow)}
@@ -399,11 +400,11 @@ footer .fsoc svg{width:20px;height:20px}
 .car-btn svg{width:20px;height:20px}
 @media(max-width:560px){.car-btn{width:36px;height:36px}}
 
-/* ---------- Gallery grid (masonry — shows each photo in full, no cropping) ---------- */
-.gallery-grid{column-count:3;column-gap:16px}
-@media(max-width:900px){.gallery-grid{column-count:2}}
-@media(max-width:560px){.gallery-grid{column-count:1}}
-.gtile{display:block;width:100%;margin:0 0 16px;break-inside:avoid;border-radius:16px;overflow:hidden;
+/* ---------- Gallery grid (row-by-row order, each photo shown in full) ---------- */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+@media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.gallery-grid{grid-template-columns:1fr}}
+.gtile{display:block;border-radius:16px;overflow:hidden;
   border:1px solid var(--border);background:var(--bg-3);cursor:zoom-in;position:relative;box-shadow:var(--shadow)}
 .gtile img{width:100%;height:auto;display:block;transition:transform .5s ease}
 .gtile:hover img{transform:scale(1.05)}
