@@ -37,6 +37,7 @@
       <a href="education.html">Education</a>
       <a href="activities.html">Activities</a>
       <a href="index.html#skills">Skills</a>
+      <a href="gallery.html">Gallery</a>
       <a href="index.html#contact">Contact</a>
     </nav>
     <div class="nav-tools">
@@ -60,7 +61,8 @@
   <a href="#edu-preview" aria-label="Education"><span class="dlabel"><span class="dnum">05</span>Education</span></a>
   <a href="#act-preview" aria-label="Activities"><span class="dlabel"><span class="dnum">06</span>Activities</span></a>
   <a href="#skills" aria-label="Skills"><span class="dlabel"><span class="dnum">07</span>Skills</span></a>
-  <a href="#contact" aria-label="Contact"><span class="dlabel"><span class="dnum">08</span>Contact</span></a>
+  <a href="#gallery-preview" aria-label="Gallery"><span class="dlabel"><span class="dnum">08</span>Gallery</span></a>
+  <a href="#contact" aria-label="Contact"><span class="dlabel"><span class="dnum">09</span>Contact</span></a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -293,6 +295,40 @@
       <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">AWS EC2</span><span class="tag">Git &amp; GitHub</span><span class="tag">VS Code</span></div>
     </div>
   </div>
+</section>
+
+<!-- ===== GALLERY (carousel preview) ===== -->
+<section class="section reveal" id="gallery-preview">
+  <h2 class="sec-title">Gallery</h2>
+  <p class="sec-sub">Moments from conferences, research, and campus life.</p>
+  <!--
+     ======================================================================
+     HOW TO ADD / CHANGE GALLERY PHOTOS:
+       • Put your images in the "gallery/" folder (e.g. gallery/photo1.jpg).
+       • Copy one <a class="car-slide glightbox-item"> ... </a> block below and
+         edit its href, the <img src>, and the data-cap caption.
+       • Use the SAME photos here as on gallery.html for a consistent set,
+         or show just a few here and the full set on the Gallery page.
+     ======================================================================
+  -->
+  <div class="carousel" id="galleryCarousel" aria-label="Photo carousel">
+    <button class="car-btn prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="car-viewport">
+      <div class="car-track">
+        <a class="car-slide glightbox-item" href="gallery/photo1.jpg" data-cap="Conference"><img src="gallery/photo1.jpg" alt="Conference" loading="lazy"></a>
+        <a class="car-slide glightbox-item" href="gallery/photo2.jpg" data-cap="Lab &amp; Research"><img src="gallery/photo2.jpg" alt="Lab &amp; Research" loading="lazy"></a>
+        <a class="car-slide glightbox-item" href="gallery/photo3.jpg" data-cap="Campus"><img src="gallery/photo3.jpg" alt="Campus" loading="lazy"></a>
+        <a class="car-slide glightbox-item" href="gallery/photo4.jpg" data-cap="Workshop"><img src="gallery/photo4.jpg" alt="Workshop" loading="lazy"></a>
+        <a class="car-slide glightbox-item" href="gallery/photo5.jpg" data-cap="Team"><img src="gallery/photo5.jpg" alt="Team" loading="lazy"></a>
+        <a class="car-slide glightbox-item" href="gallery/photo6.jpg" data-cap="Talk"><img src="gallery/photo6.jpg" alt="Talk" loading="lazy"></a>
+      </div>
+    </div>
+    <button class="car-btn next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+  <a class="btn btn-ghost" href="gallery.html" style="align-self:flex-start;margin-top:22px">
+    View full gallery
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
 </section>
 
 <!-- ===== CONTACT ===== -->

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Activities — Santanu Mondal</title>
-<meta name="description" content="Academic activities, conferences and specialized schools of Santanu Mondal — paper presentations and training at IITs, IISc, and beyond.">
+<title>Gallery — Santanu Mondal</title>
+<meta name="description" content="Photo gallery of Santanu Mondal — moments from conferences, research, workshops and campus life.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,9 +29,9 @@
       <a href="publications.html">Publications</a>
       <a href="projects.html">Projects</a>
       <a href="education.html">Education</a>
-      <a href="activities.html" class="active">Activities</a>
+      <a href="activities.html">Activities</a>
       <a href="index.html#skills">Skills</a>
-      <a href="gallery.html">Gallery</a>
+      <a href="gallery.html" class="active">Gallery</a>
       <a href="index.html#contact">Contact</a>
     </nav>
     <div class="nav-tools">
@@ -49,29 +49,31 @@
 <!-- ===== PAGE HERO ===== -->
 <section class="page-hero">
   <a class="back-link" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back to Home</a>
-  <h1>Academic Activities &amp; <span class="grad">Conferences</span></h1>
-  <p>Paper presentations, winter and summer schools, hackathons and specialized training.</p>
+  <h1><span class="grad">Gallery</span></h1>
+  <p>Moments from conferences, research, workshops and campus life. Click any photo to enlarge — use ← / → to browse and Esc to close.</p>
 </section>
 
-<!-- ===== ACTIVITIES ===== -->
-<section class="section" id="activities" style="padding-top:clamp(24px,4vw,40px)">
+<!-- ===== GALLERY GRID ===== -->
+<section class="section" style="padding-top:clamp(24px,4vw,40px)">
   <!--
      ======================================================================
-     HOW TO ADD AN ACTIVITY / CERTIFICATE:
-       1. Copy one <div class="act"> ... </div> block below.
-       2. Edit the title, date, place and description.
-       3. The <a class="cert" href="..."> is the certificate link (Google Drive
-          or any URL). Delete that line if there's no certificate.
+     HOW TO ADD / CHANGE PHOTOS:
+       1. Put your image files in the "gallery/" folder next to this page
+          (e.g. gallery/photo7.jpg). JPG or PNG both work.
+       2. Copy one whole <a class="gtile glightbox-item"> ... </a> block below.
+       3. Edit its href, the <img src>, and the data-cap caption text.
+       4. Keep href and <img src> pointing to the SAME file.
+       (The popup + arrow-key browsing works automatically for every tile.)
      ======================================================================
   -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div class="act"><div class="at"><span>ACM Winter School on Edge AI</span><span>Jan 2026</span></div><h4>IISc Bangalore</h4><p>Intensive training on Edge AI, TinyML, embedded AI, and IoT systems.</p><a class="cert" href="https://drive.google.com/file/d/1tbjBjvZ97NUJW-YG_r0NwPHv2JiNr4KW/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>Winter School — Decentralized Trust &amp; Blockchains</span><span>Dec 2025</span></div><h4>IIT Madras (CyStar)</h4><p>Focused on blockchain technologies, cryptography, and distributed systems.</p><a class="cert" href="https://drive.google.com/file/d/1j4eJod2k8tvasYO_kUDhtK7fMin5H4ft/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>Paper Presentation · ICCET 2026</span><span>Mar 2026</span></div><h4>International Conference</h4><p>Cognitive Informatics Engineering &amp; Technology, Tiruchengode, Tamil Nadu.</p><a class="cert" href="https://drive.google.com/file/d/11CzMaGVDzBRRkfWrpqB_BCSYpQ2FtIZ3/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>Paper Presentation · National Conference</span><span>Apr 2025</span></div><h4>Pondicherry University &amp; Loyola College</h4><p>Institutional collaboration for transforming distance education.</p><a class="cert" href="https://drive.google.com/file/d/1j9sq66SSxEf4UwNSmdEkz49ia6YLZA4g/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>Paper Presentation · icSoftComp</span><span>Dec 2023</span></div><h4>5th Intl. Conf. on Soft Computing</h4><p>Soft Computing and its Engineering Applications.</p><a class="cert" href="https://drive.google.com/file/d/1-x-ef4wS1KcKNnLjhbYBnGzW8P5xQr5J/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <div class="act"><div class="at"><span>ACM Summer School</span><span>Jul 2022</span></div><h4>IIIT Delhi</h4><p>Training on geometric modelling and computational methods.</p><a class="cert" href="https://drive.google.com/file/d/15ZHp8pplIxlIg-cmroosHhBSr4hV6xS6/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>Certificate</a></div>
-    <!-- ⬆️ To add another activity, copy a block above and edit it. -->
+  <div class="gallery-grid">
+    <a class="gtile glightbox-item" href="gallery/photo1.jpg" data-cap="Conference"><img src="gallery/photo1.jpg" alt="Conference" loading="lazy"></a>
+    <a class="gtile glightbox-item" href="gallery/photo2.jpg" data-cap="Lab &amp; Research"><img src="gallery/photo2.jpg" alt="Lab &amp; Research" loading="lazy"></a>
+    <a class="gtile glightbox-item" href="gallery/photo3.jpg" data-cap="Campus"><img src="gallery/photo3.jpg" alt="Campus" loading="lazy"></a>
+    <a class="gtile glightbox-item" href="gallery/photo4.jpg" data-cap="Workshop"><img src="gallery/photo4.jpg" alt="Workshop" loading="lazy"></a>
+    <a class="gtile glightbox-item" href="gallery/photo5.jpg" data-cap="Team"><img src="gallery/photo5.jpg" alt="Team" loading="lazy"></a>
+    <a class="gtile glightbox-item" href="gallery/photo6.jpg" data-cap="Talk"><img src="gallery/photo6.jpg" alt="Talk" loading="lazy"></a>
+    <!-- ⬆️ To add another photo, copy a block above and edit it. -->
   </div>
 </section>
 
