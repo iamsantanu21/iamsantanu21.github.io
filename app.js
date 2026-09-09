@@ -177,6 +177,49 @@
   start();
 })();
 
+/* ---- Gallery justified layout: rows fill the full width, no blank gaps, order kept ---- */
+(function(){
+  var grid=document.querySelector('.gallery-grid'); if(!grid) return;
+  var GAP=12;
+  var tiles=Array.prototype.slice.call(grid.querySelectorAll('.gtile'));
+  function ar(t){ var i=t.querySelector('img'); return (i&&i.naturalWidth&&i.naturalHeight)? i.naturalWidth/i.naturalHeight : 1.5; }
+  function targetH(W){ return W>=900?240 : W>=560?205 : 175; }
+  function flush(row,W,th,stretch){
+    var arSum=row.reduce(function(s,t){return s+ar(t);},0);
+    var gaps=(row.length-1)*GAP;
+    var rh=Math.round(stretch ? (W-gaps)/arSum : Math.min(th,(W-gaps)/arSum));
+    var rd=document.createElement('div'); rd.className='grow-row'; rd.style.height=rh+'px';
+    row.forEach(function(t){
+      if(stretch){ t.style.flex=ar(t).toFixed(4)+' 1 0'; t.style.width='auto'; }   // grow to fill the line
+      else { t.style.flex='0 0 auto'; t.style.width=Math.round(rh*ar(t))+'px'; }     // last row: natural width
+      t.style.height='100%';
+      rd.appendChild(t);
+    });
+    grid.appendChild(rd);
+  }
+  function justify(){
+    var W=grid.clientWidth; if(W<=0) return;
+    var th=targetH(W);
+    grid.innerHTML='';                        // rebuild rows
+    var row=[], sum=0;
+    tiles.forEach(function(t){
+      row.push(t); sum+=ar(t);
+      if(sum*th + (row.length-1)*GAP >= W){ flush(row,W,th,true); row=[]; sum=0; }
+    });
+    if(row.length) flush(row,W,th,false);
+  }
+  var pending=tiles.length;
+  tiles.forEach(function(t){
+    var img=t.querySelector('img');
+    if(img && img.complete){ if(--pending<=0) justify(); }
+    else if(img) img.addEventListener('load', justify);
+    else pending--;
+  });
+  justify();
+  window.addEventListener('load',justify);
+  var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(justify,150);});
+})();
+
 /* ---- Lightbox: click a photo to enlarge, ← / → to browse, Esc to close ---- */
 (function(){
   // unique photos = the real items (exclude marquee clones)
