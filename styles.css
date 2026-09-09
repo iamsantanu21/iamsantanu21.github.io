@@ -379,6 +379,8 @@ footer .fsoc svg{width:20px;height:20px}
 /* ---------- Photo carousel (home) ---------- */
 .carousel{position:relative;display:flex;align-items:center;gap:10px;margin-top:8px}
 .car-viewport{overflow:hidden;flex:1;border-radius:18px}
+.carousel.marquee .car-viewport{-webkit-mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.carousel.marquee .car-slide{cursor:pointer}
 .car-track{display:flex;gap:16px;will-change:transform;transition:transform .55s cubic-bezier(.22,.61,.36,1)}
 .car-slide{flex:0 0 auto;width:min(360px,80%);aspect-ratio:3/2;border-radius:16px;overflow:hidden;
   border:1px solid var(--border);background:var(--bg-3);cursor:zoom-in;position:relative;box-shadow:var(--shadow)}
