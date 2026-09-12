@@ -615,7 +615,7 @@ function renderDash(){
     c3.innerHTML="<h3>☁️ Auto-sync to GitHub (optional)</h3>"+
      "<p style='margin:0 0 10px;font-size:.92rem'>Paste a GitHub token to <b>auto-save</b> your progress to <code>"+GH.path+"</code> and <b>auto-load</b> it on any device. ⚠️ Your ticks &amp; notes will be <b>public</b> in this repo.</p>"+
      "<div class='btnrow'><input class='inp' id='ghtok' type='password' placeholder='Paste GitHub token (github_pat_… or ghp_…)' autocomplete='off' spellcheck='false'><button class='btn primary' id='ghSave'>Connect</button></div>"+
-     "<p class='hint'>Best: a <b>fine-grained</b> token limited to only <code>"+GH.repo+"</code> → Repository permissions → <b>Contents: Read and write</b>, with an expiry. It's stored only in this browser, never in the page or the repo. <a href='https://github.com/settings/personal-access-tokens/new' target='_blank' rel='noopener'>Create a fine-grained token ↗</a></p>";
+     "<p class='hint'>Best: a <b>fine-grained</b> token limited to only <code>"+GH.repo+"</code> → Repository permissions → <b>Contents: Read and write</b>, with an expiry. It's stored only in this browser, never in the page or the repo. <a href='https://github.com/settings/personal-access-tokens/' target='_blank' rel='noopener'>Create / manage your tokens ↗</a></p>";
   } else {
     c3.innerHTML="<h3>☁️ Auto-sync to GitHub</h3>"+
      "<p class='syncstat' id='syncstat'>Connected</p>"+
