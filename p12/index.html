@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P12 Prep Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#f6f5f1; --surface:#ffffff; --surface-2:#f0efe9;
+    --ink:#191c22; --muted:#5c6270; --faint:#8a8f9c; --line:#e2e0d8;
+    --teal:#0f766e; --teal-soft:#0f766e1a;
+    --amber:#b45309; --amber-soft:#b453091a;
+    --green:#15803d; --green-soft:#15803d1a;
+    --blue:#1d4ed8; --blue-soft:#1d4ed81a;
+    --red:#b42318;
+    --shadow:0 1px 2px rgba(20,23,28,.05),0 6px 20px rgba(20,23,28,.06);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#121519; --surface:#1a1e24; --surface-2:#20252c;
+      --ink:#e9ebee; --muted:#a2a9b4; --faint:#727984; --line:#2c323a;
+      --teal:#2dd4bf; --teal-soft:#2dd4bf1f;
+      --amber:#f0a02c; --amber-soft:#f0a02c1f;
+      --green:#4ade80; --green-soft:#4ade801f;
+      --blue:#60a5fa; --blue-soft:#60a5fa1f;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#121519; --surface:#1a1e24; --surface-2:#20252c;
+    --ink:#e9ebee; --muted:#a2a9b4; --faint:#727984; --line:#2c323a;
+    --teal:#2dd4bf; --teal-soft:#2dd4bf1f;
+    --amber:#f0a02c; --amber-soft:#f0a02c1f;
+    --green:#4ade80; --green-soft:#4ade801f;
+    --blue:#60a5fa; --blue-soft:#60a5fa1f;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  a{color:var(--teal)}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+  .wrap{max-width:860px;margin:0 auto;padding-inline:18px}
+
+  /* top bar */
+  .topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 92%,transparent);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .topbar .row1{display:flex;align-items:center;gap:12px;padding-block:10px}
+  .brand{font-weight:700;letter-spacing:-.01em;font-size:1rem;white-space:nowrap;display:flex;align-items:center;gap:7px}
+  .brand .dot{width:9px;height:9px;border-radius:99px;background:var(--teal)}
+  .bar{flex:1;height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden;min-width:60px}
+  .bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:99px;transition:width .35s}
+  #ovpct{font-size:.85rem;font-weight:600;font-family:"IBM Plex Mono",monospace;min-width:3.2ch;text-align:right}
+  #saved{font-size:.68rem;color:var(--faint);white-space:nowrap;font-family:"IBM Plex Mono",monospace}
+
+  /* tabs */
+  nav.tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px;-ms-overflow-style:none;scrollbar-width:none}
+  nav.tabs::-webkit-scrollbar{display:none}
+  nav.tabs button{font:inherit;font-size:.85rem;font-weight:500;white-space:nowrap;border:1px solid var(--line);
+    background:var(--surface);color:var(--muted);padding:7px 13px;border-radius:99px;cursor:pointer;display:flex;align-items:center;gap:6px}
+  nav.tabs button .n{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--faint)}
+  nav.tabs button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  nav.tabs button.active .n{color:var(--paper);opacity:.7}
+
+  main{padding-block:22px 60px}
+  h1{font-size:clamp(1.6rem,4.5vw,2.3rem);line-height:1.08;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance}
+  .lead{color:var(--muted);margin:0 0 4px;max-width:60ch}
+
+  .panelhead{margin:6px 0 16px}
+  .panelhead .ey{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+
+  .group{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:14px}
+  .group > .gt{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;margin:0}
+  .group > .gs{color:var(--muted);font-size:.88rem;margin:2px 0 10px}
+  .group > .gt + .rows{margin-top:10px}
+
+  .rows{display:flex;flex-direction:column;gap:2px}
+  .row{display:flex;gap:10px;align-items:flex-start;padding:7px 6px;border-radius:9px}
+  .row:hover{background:var(--surface-2)}
+  .chk{flex:none;margin-top:1px}
+  .chk input{appearance:none;-webkit-appearance:none;margin:0;width:19px;height:19px;border:1.8px solid var(--faint);
+    border-radius:6px;display:grid;place-content:center;cursor:pointer;transition:.12s}
+  .chk input:checked{background:var(--teal);border-color:var(--teal)}
+  .chk input:checked::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2.2px 2.2px 0;transform:rotate(45deg) translateY(-1px)}
+  .chk input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .main{flex:1;min-width:0}
+  .txt{font-size:.94rem;line-height:1.45}
+  .row.done .txt{color:var(--faint);text-decoration:line-through}
+  .row.done .txt *{color:var(--faint)!important}
+  .txt .wk{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.8rem;background:var(--surface-2);padding:1px 7px;border-radius:5px;margin-right:4px}
+  .txt .st{color:var(--amber);font-weight:600}
+  .txt em{font-style:normal;color:var(--muted)}
+  .txt b{font-weight:600}
+  .notebtn{flex:none;border:none;background:transparent;cursor:pointer;font-size:.95rem;opacity:.4;padding:2px 4px;border-radius:6px;line-height:1}
+  .notebtn:hover{opacity:.9;background:var(--surface-2)}
+  .notebtn.has{opacity:1}
+  .notewrap{margin-top:7px}
+  .notewrap textarea{width:100%;min-height:60px;resize:vertical;font:inherit;font-size:.88rem;color:var(--ink);
+    background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+  .notewrap textarea:focus{outline:2px solid var(--teal);outline-offset:1px;background:var(--surface)}
+  .row.hasnote{background:var(--amber-soft)}
+
+  .gprog{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--muted);float:right;background:var(--surface-2);padding:2px 8px;border-radius:6px}
+
+  /* dashboard */
+  .dashcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:14px}
+  .dashcard h3{margin:0 0 12px;font-size:1.02rem}
+  .stat{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .stat:last-child{margin-bottom:0}
+  .stat .nm{width:120px;font-size:.9rem;font-weight:500;display:flex;align-items:center;gap:7px}
+  .stat .cnt{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--muted);min-width:66px;text-align:right}
+  .btnrow{display:flex;flex-wrap:wrap;gap:9px}
+  .btn{font:inherit;font-size:.88rem;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+    padding:9px 15px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+  .btn:hover{border-color:var(--teal)}
+  .btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .btn.primary:hover{filter:brightness(1.06)}
+  .btn.danger{color:var(--red)}
+  .steps{counter-reset:s;list-style:none;margin:8px 0 0;padding:0}
+  .steps li{position:relative;padding:6px 0 6px 34px;font-size:.9rem;color:var(--muted)}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:5px;width:22px;height:22px;
+    background:var(--teal-soft);color:var(--teal);border-radius:99px;display:grid;place-content:center;font-size:.78rem;font-weight:600;font-family:"IBM Plex Mono",monospace}
+  .steps li b{color:var(--ink)}
+  code{font-family:"IBM Plex Mono",monospace;font-size:.85em;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+  .hint{font-size:.82rem;color:var(--faint);margin-top:10px}
+
+  footer{color:var(--faint);font-size:.8rem;text-align:center;padding:20px 0}
+  @media (max-width:480px){ .stat .nm{width:96px} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="row1">
+      <span class="brand"><span class="dot"></span>P12 Tracker</span>
+      <div class="bar"><span id="ovfill"></span></div>
+      <span id="ovpct" class="mono">0%</span>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+  </div>
+</div>
+
+<main class="wrap" id="main"></main>
+
+<input type="file" id="importfile" accept="application/json,.json" hidden>
+<footer>P12 Prep Tracker · runs locally · your ticks &amp; notes are saved in this browser · export to sync via GitHub · <span id="saved"></span></footer>
+
+<script>
+/* ============================ DATA ============================ */
+const DATA = [
+ { id:"dash", label:"Dashboard", icon:"📊" },
+
+ { id:"plan", label:"18-Day Plan", icon:"📅",
+   intro:{h:"Your 18-day battle plan", p:"Four pillars, an 18-day schedule, the questions to rehearse, and the paperwork. Tick as you go."},
+   groups:[
+    {t:"Pillar 1 — Background subjects (OS · Networks · AI/ML)", s:"They listed these; expect direct \"explain X\" questions.", items:[
+      ["pl-p1-1","<b>OS:</b> processes vs threads, scheduling, memory & virtual memory, deadlocks <span class='st'>★</span>"],
+      ["pl-p1-2","<b>OS security angle:</b> user vs kernel mode, privileges, system calls, sandboxing, virtualization & containers"],
+      ["pl-p1-3","<b>Networks:</b> OSI & TCP/IP, TCP vs UDP, 3-way handshake, ports, DNS, NAT <span class='st'>★</span>"],
+      ["pl-p1-4","<b>Networks security:</b> HTTP/HTTPS, TLS, firewalls, common attacks (MITM, DoS, spoofing, scanning)"],
+      ["pl-p1-5","<b>AI/ML basics:</b> supervised vs unsupervised, over/underfitting, train/val/test, precision/recall/F1, ROC <span class='st'>★</span>"],
+      ["pl-p1-6","<b>Modern AI:</b> neural net & transformer, LLM, RAG, and what an AI agent (tool-calling + reasoning loop) is"],
+    ]},
+    {t:"Pillar 2 — VAPT / agentic-security domain", s:"The project's own subject.", items:[
+      ["pl-p2-1","VAPT stages: recon → scanning → exploitation → post-exploitation → reporting <span class='st'>★</span>"],
+      ["pl-p2-2","Vulnerability assessment (find) vs penetration testing (prove)"],
+      ["pl-p2-3","Frameworks: OWASP Top 10, CVE / CVSS, MITRE ATT&CK <span class='st'>★</span>"],
+      ["pl-p2-4","Tools: Nmap, Burp Suite, Metasploit, Nessus (know what they do)"],
+      ["pl-p2-5","Agentic pentesting: PentestGPT, VulnBot, AutoPentester, HackingBuddyGPT <span class='st'>★</span>"],
+      ["pl-p2-6","Open challenges: safe validation, hallucination, scope control, adapting to new threats"],
+    ]},
+    {t:"Pillar 3 — Know your advisor's research (Dr. Saurabh Kumar)", s:"\"I read your paper\" wins interviews.", items:[
+      ["pl-p3-1","Read <b>GLAMP</b> — adversarially-robust malware ML (connects to your MalURLX) <span class='st'>★</span>"],
+      ["pl-p3-2","Read <b>SCRUBD</b> — smart-contract vulnerability dataset (bridges your Solidity/blockchain) <span class='st'>★</span>"],
+      ["pl-p3-3","Skim <b>IoT-FedMalDetect</b> — federated malware detection on IoT edge (bridges your IoT security)"],
+      ["pl-p3-4","Prepare 1 thoughtful question about his direction for the project"],
+    ]},
+    {t:"Pillar 4 — Your own story, told sharply", s:"Explain each project in 60 seconds and defend the choices.", items:[
+      ["pl-p4-1","<b>MalURLX</b> (ICCET 2026): dataset, features, model, metrics — your #1 hook <span class='st'>★</span>"],
+      ["pl-p4-2","<b>Blockchain / CBDC / ZKP-PUF</b> — explain simply, link to smart-contract security"],
+      ["pl-p4-3","<b>IoT security</b> project/paper — link to the IoT part of P12"],
+      ["pl-p4-4","<b>Edge AI / on-device inference</b> — link to running AI agents efficiently"],
+      ["pl-p4-5","One-line answer to \"Why is your background a fit for P12?\""],
+    ]},
+    {t:"Phase 1 · Days 1–6 · Foundations", items:[
+      ["pl-d1","<span class='wk'>Day 1</span>OS core (processes/threads, scheduling, memory) + open advisor's papers"],
+      ["pl-d2","<span class='wk'>Day 2</span>OS security + virtualization; write 5 OS flash Q&A"],
+      ["pl-d3","<span class='wk'>Day 3</span>Networks core (OSI/TCP-IP, TCP/UDP, handshake, ports, DNS, NAT)"],
+      ["pl-d4","<span class='wk'>Day 4</span>Network security (TLS, HTTPS, firewalls, MITM/DoS) + read GLAMP"],
+      ["pl-d5","<span class='wk'>Day 5</span>AI/ML basics (metrics, overfitting) — link to MalURLX"],
+      ["pl-d6","<span class='wk'>Day 6</span>Modern AI: LLMs & agents; self-test all Pillar-1 items"],
+    ]},
+    {t:"Phase 2 · Days 7–12 · Domain deep-dive", items:[
+      ["pl-d7","<span class='wk'>Day 7</span>VAPT fundamentals (5 stages) + OWASP Top 10 skim"],
+      ["pl-d8","<span class='wk'>Day 8</span>Frameworks (CVE/CVSS, MITRE) + tools + read SCRUBD"],
+      ["pl-d9","<span class='wk'>Day 9</span>Agentic pentesting (PentestGPT + one of VulnBot/AutoPentester)"],
+      ["pl-d10","<span class='wk'>Day 10</span>Skim IoT-FedMalDetect; map advisor's arc → P12; write your question"],
+      ["pl-d11","<span class='wk'>Day 11</span>Draft your research idea (3–4 lines: how you'd improve agentic VAPT)"],
+      ["pl-d12","<span class='wk'>Day 12</span>60-sec pitch for each of your projects + one hard-question defence each"],
+    ]},
+    {t:"Phase 3 · Days 13–18 · Polish & rehearse", items:[
+      ["pl-d13","<span class='wk'>Day 13</span>Write answers to all the interview questions (next tab section)"],
+      ["pl-d14","<span class='wk'>Day 14</span>Mock interview #1 (aloud/recorded); list 3 weakest answers"],
+      ["pl-d15","<span class='wk'>Day 15</span>Re-study the 3 weak areas"],
+      ["pl-d16","<span class='wk'>Day 16</span>Mock interview #2 + check documents & setup"],
+      ["pl-d17","<span class='wk'>Day 17</span>Light revision only — your flash Q&A + summaries, no new topics"],
+      ["pl-d18","<span class='wk'>Day 18</span>Rest, test camera/mic, sleep early 😌"],
+    ]},
+    {t:"Questions to rehearse", s:"Tick when your answer is written & practised.", items:[
+      ["pl-q1","Why a PhD, and why this project (P12)?"],
+      ["pl-q2","Why do you fit the OS / Networks / AI-ML background?"],
+      ["pl-q3","Explain a project of yours end-to-end (use MalURLX)."],
+      ["pl-q4","What is an AI agent, and how would one do penetration testing?"],
+      ["pl-q5","Difference between vulnerability assessment and penetration testing?"],
+      ["pl-q6","Biggest risk in autonomous pentesting agents?"],
+      ["pl-q7","A research idea you'd want to try here?"],
+      ["pl-q8","Strengths, weaknesses, 5-year plan, funding?"],
+    ]},
+    {t:"Documents & logistics", items:[
+      ["pl-l1","1-page SOP ready (why PhD, research interests + why P12)"],
+      ["pl-l2","Originals + soft copies: degree/marksheets, publications, category cert"],
+      ["pl-l3","Updated resume + 1-page project summary beside you"],
+      ["pl-l4","Confirm interview date/time & whether a written test applies (phd.admissions@cse.iith.ac.in)"],
+      ["pl-l5","Test camera, mic, internet, quiet spot, backup network"],
+      ["pl-l6","Outreach email to Dr. Saurabh Kumar sent"],
+    ]},
+   ]},
+
+ { id:"syllabus", label:"Full Syllabus", icon:"📚",
+   intro:{h:"Everything to study — down to the sub-topic", p:"★ = must-know (asked most). OS/Networks/AI-ML: textbook-level. VAPT: concept + why it matters."},
+   groups:[
+    {t:"🖥️ OS · Fundamentals", items:[
+      ["sy-os-1","What an OS does; kernel vs user space <span class='st'>★</span>"],
+      ["sy-os-2","User vs kernel mode (dual mode), mode switch"],
+      ["sy-os-3","System calls — how a program asks the OS for a service <span class='st'>★</span>"],
+      ["sy-os-4","Interrupts, traps, exceptions"],
+      ["sy-os-5","Types of OS; monolithic vs microkernel"],
+    ]},
+    {t:"🖥️ OS · Processes & threads", items:[
+      ["sy-os-6","Process vs program; PCB <span class='st'>★</span>"],
+      ["sy-os-7","Process states & diagram"],
+      ["sy-os-8","Context switch — what is saved/restored <span class='st'>★</span>"],
+      ["sy-os-9","Process vs thread; multithreading benefits <span class='st'>★</span>"],
+      ["sy-os-10","User vs kernel threads; multithreading models"],
+      ["sy-os-11","IPC: pipes, shared memory, message passing, sockets"],
+      ["sy-os-12","fork(), zombie & orphan processes"],
+    ]},
+    {t:"🖥️ OS · CPU scheduling", items:[
+      ["sy-os-13","Scheduling criteria (throughput, turnaround, waiting, response) <span class='st'>★</span>"],
+      ["sy-os-14","Preemptive vs non-preemptive"],
+      ["sy-os-15","FCFS, SJF, SRTF, Priority, Round Robin — solve one numerically <span class='st'>★</span>"],
+      ["sy-os-16","Multilevel & feedback queue; starvation & aging"],
+    ]},
+    {t:"🖥️ OS · Synchronization & deadlock", items:[
+      ["sy-os-17","Race condition; critical section problem <span class='st'>★</span>"],
+      ["sy-os-18","Mutex, semaphore (binary/counting), monitors"],
+      ["sy-os-19","Producer-consumer, readers-writers, dining philosophers"],
+      ["sy-os-20","Deadlock 4 conditions <span class='st'>★</span>"],
+      ["sy-os-21","Deadlock prevention, avoidance (Banker's), detection, recovery"],
+    ]},
+    {t:"🖥️ OS · Memory management", items:[
+      ["sy-os-22","Logical vs physical address; MMU"],
+      ["sy-os-23","Contiguous allocation; internal vs external fragmentation"],
+      ["sy-os-24","Paging & page table; TLB <span class='st'>★</span>"],
+      ["sy-os-25","Segmentation"],
+      ["sy-os-26","Virtual memory; demand paging; page fault <span class='st'>★</span>"],
+      ["sy-os-27","Page replacement: FIFO, LRU, Optimal; Belady's anomaly"],
+      ["sy-os-28","Thrashing; working set"],
+    ]},
+    {t:"🖥️ OS · File systems & I/O", items:[
+      ["sy-os-29","File concept, directory, inode"],
+      ["sy-os-30","Allocation methods (contiguous, linked, indexed); journaling"],
+      ["sy-os-31","Disk scheduling (FCFS, SSTF, SCAN, C-SCAN) — basics"],
+    ]},
+    {t:"🖥️ OS · Security (most relevant to P12)", items:[
+      ["sy-os-32","Protection rings / privilege levels <span class='st'>★</span>"],
+      ["sy-os-33","Access control: DAC, MAC, RBAC"],
+      ["sy-os-34","Unix file permissions (rwx, chmod, setuid/setgid)"],
+      ["sy-os-35","Privilege escalation (concept)"],
+      ["sy-os-36","Memory protections: ASLR, DEP/NX, stack canaries"],
+      ["sy-os-37","Virtualization: hypervisor type 1 vs 2 <span class='st'>★</span>"],
+      ["sy-os-38","Containers vs VMs; namespaces & cgroups"],
+      ["sy-os-39","Sandboxing; Linux security commands (ps, ss, lsof)"],
+    ]},
+    {t:"🌐 Networks · Models & basics", items:[
+      ["sy-net-1","OSI 7 layers — role of each <span class='st'>★</span>"],
+      ["sy-net-2","TCP/IP model; mapping to OSI <span class='st'>★</span>"],
+      ["sy-net-3","Encapsulation; PDUs (frame, packet, segment)"],
+      ["sy-net-4","Devices: hub, switch, router, gateway"],
+    ]},
+    {t:"🌐 Networks · Data-link & network layer", items:[
+      ["sy-net-5","MAC address; Ethernet; switching"],
+      ["sy-net-6","ARP — maps IP to MAC <span class='st'>★</span>"],
+      ["sy-net-7","Error detection (parity, CRC, checksum); VLAN"],
+      ["sy-net-8","IPv4 addressing, classes, private vs public <span class='st'>★</span>"],
+      ["sy-net-9","Subnetting & CIDR — solve one example"],
+      ["sy-net-10","IPv6 basics; why it exists"],
+      ["sy-net-11","Routing (static vs dynamic; distance-vector vs link-state)"],
+      ["sy-net-12","ICMP (ping, traceroute); NAT <span class='st'>★</span>"],
+    ]},
+    {t:"🌐 Networks · Transport & application", items:[
+      ["sy-net-13","TCP vs UDP — when each is used <span class='st'>★</span>"],
+      ["sy-net-14","TCP 3-way handshake; 4-way teardown <span class='st'>★</span>"],
+      ["sy-net-15","Flow control (sliding window); congestion control (slow start)"],
+      ["sy-net-16","Ports & sockets; well-known ports (80,443,22,53,21,25)"],
+      ["sy-net-17","DNS — how resolution works <span class='st'>★</span>"],
+      ["sy-net-18","HTTP/HTTPS; methods, status codes <span class='st'>★</span>"],
+      ["sy-net-19","DHCP, FTP, SMTP, SSH, Telnet"],
+    ]},
+    {t:"🌐 Networks · Security & wireless/IoT", items:[
+      ["sy-net-20","TLS/SSL handshake; certificates & PKI <span class='st'>★</span>"],
+      ["sy-net-21","Symmetric vs asymmetric crypto; hashing"],
+      ["sy-net-22","Firewalls (stateful/stateless); proxy; IDS vs IPS; VPN"],
+      ["sy-net-23","Sniffing, MITM, ARP/DNS spoofing"],
+      ["sy-net-24","DoS/DDoS; SYN flood; session hijacking <span class='st'>★</span>"],
+      ["sy-net-25","Port scanning; WiFi (WPA2/3)"],
+      ["sy-net-26","IoT protocols: MQTT, CoAP; IoT attack surface"],
+    ]},
+    {t:"🤖 AI/ML · Fundamentals & data", items:[
+      ["sy-ml-1","What is ML; AI vs ML vs DL <span class='st'>★</span>"],
+      ["sy-ml-2","Supervised vs unsupervised vs reinforcement <span class='st'>★</span>"],
+      ["sy-ml-3","Features, labels; classification vs regression"],
+      ["sy-ml-4","Train/val/test split; cross-validation <span class='st'>★</span>"],
+      ["sy-ml-5","Cleaning, missing values, outliers"],
+      ["sy-ml-6","Normalization vs standardization; encoding"],
+      ["sy-ml-7","Feature engineering & selection"],
+      ["sy-ml-8","Class imbalance (SMOTE, class weights)"],
+    ]},
+    {t:"🤖 AI/ML · Algorithms & evaluation", items:[
+      ["sy-ml-9","Linear & logistic regression <span class='st'>★</span>"],
+      ["sy-ml-10","Decision tree; random forest <span class='st'>★</span>"],
+      ["sy-ml-11","SVM; KNN; Naive Bayes"],
+      ["sy-ml-12","Gradient boosting / XGBoost"],
+      ["sy-ml-13","k-means; hierarchical clustering; PCA"],
+      ["sy-ml-14","Confusion matrix; TP/FP/TN/FN <span class='st'>★</span>"],
+      ["sy-ml-15","Accuracy, precision, recall, F1 — when accuracy misleads <span class='st'>★</span>"],
+      ["sy-ml-16","ROC-AUC, PR curve"],
+      ["sy-ml-17","Overfitting vs underfitting; bias-variance <span class='st'>★</span>"],
+      ["sy-ml-18","Regularization (L1/L2); hyperparameter tuning"],
+    ]},
+    {t:"🤖 AI/ML · Deep learning, NLP & LLMs", items:[
+      ["sy-ml-19","Perceptron & neural net; activation functions <span class='st'>★</span>"],
+      ["sy-ml-20","Forward pass, backprop, gradient descent (SGD, Adam)"],
+      ["sy-ml-21","Loss functions; epochs, batch size, learning rate"],
+      ["sy-ml-22","CNN, RNN/LSTM (basics); embeddings"],
+      ["sy-ml-23","Tokenization; word embeddings (Word2Vec idea)"],
+      ["sy-ml-24","Attention; transformer architecture <span class='st'>★</span>"],
+      ["sy-ml-25","What an LLM is; pretraining vs fine-tuning <span class='st'>★</span>"],
+      ["sy-ml-26","Prompting, in-context learning; hallucination"],
+      ["sy-ml-27","RAG; embeddings + vector database <span class='st'>★</span>"],
+    ]},
+    {t:"🤖 AI/ML · Agents & ML-for-security (heart of P12)", items:[
+      ["sy-ml-28","What an AI agent is (perceive → reason → act) <span class='st'>★</span>"],
+      ["sy-ml-29","ReAct pattern; the agent loop <span class='st'>★</span>"],
+      ["sy-ml-30","Tool / function calling <span class='st'>★</span>"],
+      ["sy-ml-31","Planning & memory; multi-agent systems"],
+      ["sy-ml-32","Agent frameworks (LangGraph / LangChain — you know these)"],
+      ["sy-ml-33","Malware / anomaly / intrusion detection with ML"],
+      ["sy-ml-34","Feature extraction from URLs/files (your MalURLX)"],
+      ["sy-ml-35","Adversarial ML: evasion, poisoning, adversarial examples <span class='st'>★</span>"],
+      ["sy-ml-36","Model robustness (ties to advisor's GLAMP)"],
+    ]},
+    {t:"🔐 VAPT · Fundamentals & crypto", items:[
+      ["sy-vp-1","CIA triad <span class='st'>★</span>"],
+      ["sy-vp-2","Threat vs vulnerability vs risk vs exploit <span class='st'>★</span>"],
+      ["sy-vp-3","Attack surface; threat modeling"],
+      ["sy-vp-4","Authentication vs authorization; AAA"],
+      ["sy-vp-5","Symmetric vs asymmetric; hashing; digital signatures"],
+      ["sy-vp-6","PKI, certificates"],
+    ]},
+    {t:"🔐 VAPT · Lifecycle, recon & web", items:[
+      ["sy-vp-7","Vulnerability assessment vs penetration testing <span class='st'>★</span>"],
+      ["sy-vp-8","Recon (passive vs active) <span class='st'>★</span>"],
+      ["sy-vp-9","Scanning & enumeration <span class='st'>★</span>"],
+      ["sy-vp-10","Vulnerability analysis"],
+      ["sy-vp-11","Exploitation (gaining access) <span class='st'>★</span>"],
+      ["sy-vp-12","Post-exploitation (priv-esc, lateral movement, persistence)"],
+      ["sy-vp-13","Reporting & remediation"],
+      ["sy-vp-14","OSINT, WHOIS, DNS enum, footprinting"],
+      ["sy-vp-15","Port scanning types; service/OS fingerprinting"],
+      ["sy-vp-16","OWASP Top 10 — know the list <span class='st'>★</span>"],
+      ["sy-vp-17","SQL injection; XSS; CSRF <span class='st'>★</span>"],
+      ["sy-vp-18","Broken auth, IDOR, SSRF, misconfiguration"],
+    ]},
+    {t:"🔐 VAPT · Frameworks, tools & agentic", items:[
+      ["sy-vp-19","CVE & CVSS scoring <span class='st'>★</span>"],
+      ["sy-vp-20","CWE; MITRE ATT&CK <span class='st'>★</span>"],
+      ["sy-vp-21","Cyber kill chain; PTES"],
+      ["sy-vp-22","Nmap <span class='st'>★</span>; Burp; sqlmap; Nikto"],
+      ["sy-vp-23","Metasploit; Nessus/OpenVAS <span class='st'>★</span>"],
+      ["sy-vp-24","Wireshark; Hydra"],
+      ["sy-vp-25","Cloud attack surface & misconfigurations"],
+      ["sy-vp-26","IoT firmware, protocol & device attacks"],
+      ["sy-vp-27","Agentic VAPT: LLM agent drives the stages <span class='st'>★</span>"],
+      ["sy-vp-28","Know: PentestGPT, VulnBot, AutoPentester, HackingBuddyGPT <span class='st'>★</span>"],
+      ["sy-vp-29","Single-agent vs multi-agent pentesting"],
+      ["sy-vp-30","Open challenges: safe validation, hallucination, scope, ethics <span class='st'>★</span>"],
+    ]},
+   ]},
+
+ { id:"courses", label:"NPTEL Courses", icon:"🎓",
+   intro:{h:"NPTEL (CSE · Video) — exact weeks to watch", p:"★ = highest priority. All lectures free on each course page. Only the listed weeks are needed."},
+   groups:[
+    {t:"🖥️ OS — Introduction to Operating Systems", s:"Chester Rebeiro · IIT Madras · 8 weeks · <a href='https://nptel.ac.in/courses/106106144' target='_blank' rel='noopener'>course link ↗</a>", items:[
+      ["co-os-1","<span class='wk'>W1</span>Introduction — OS role, programs → processes, sharing CPU <span class='st'>★</span>"],
+      ["co-os-2","<span class='wk'>W3</span>Processes — create/execute/exit, system calls <span class='st'>★</span>"],
+      ["co-os-3","<span class='wk'>W4</span>Interrupts — handling, system calls, context switching <span class='st'>★</span>"],
+      ["co-os-4","<span class='wk'>W5</span>Scheduling — CPU, priority, multiprocessor, Linux CFS <span class='st'>★</span>"],
+      ["co-os-5","<span class='wk'>W6</span>Synchronization — IPC, critical section, mutex, semaphores <span class='st'>★</span>"],
+      ["co-os-6","<span class='wk'>W7</span>Deadlocks & Threads <span class='st'>★</span>"],
+      ["co-os-7","<span class='wk'>W2</span>Memory Management — virtual memory, MMU, segmentation"],
+      ["co-os-8","<span class='wk'>W8</span>Security — OS security, buffer overflows (also VAPT!) <span class='st'>★</span>"],
+    ]},
+    {t:"🌐 Networks — Computer Networks and Internet Protocol", s:"Chakraborty & Ghosh · IIT KGP · <a href='https://nptel.ac.in/courses/106105183' target='_blank' rel='noopener'>course link ↗</a>", items:[
+      ["co-net-1","<span class='wk'>L1–5</span>Intro, switching, protocol stack & layers, app layer <span class='st'>★</span>"],
+      ["co-net-2","<span class='wk'>L6–10</span>DNS, Web, HTTP, mail, FTP <span class='st'>★</span>"],
+      ["co-net-3","<span class='wk'>L11–15</span>Transport — services, connection, reliability, sliding window"],
+      ["co-net-4","<span class='wk'>L19–25</span>TCP, UDP, sockets (flow & congestion control) <span class='st'>★</span>"],
+      ["co-net-5","<span class='wk'>L26–30</span>Network layer — IPv4, CIDR, NAT, IPv6 <span class='st'>★</span>"],
+      ["co-net-6","<span class='wk'>L36–38</span>IP routing — routing table, intra/inter-domain"],
+      ["co-net-7","<span class='wk'>L46–50</span>Data link — Ethernet, flow & error control"],
+      ["co-net-8","<span class='wk'>L51–54</span>ARP, DHCP, Wireless LANs"],
+      ["co-net-9","<span class='wk'>L58–60</span>Network Security — overview, TCP/IP security <span class='st'>★</span>"],
+    ]},
+    {t:"🤖 AI/ML — Introduction to Machine Learning", s:"Balaraman Ravindran · IIT Madras · 12 weeks · <a href='https://nptel.ac.in/courses/106106139' target='_blank' rel='noopener'>course link ↗</a>", items:[
+      ["co-ml-1","<span class='wk'>W1</span>Intro — supervised/unsupervised/RL, bias–variance <span class='st'>★</span>"],
+      ["co-ml-2","<span class='wk'>W2</span>Linear regression (first 2 lectures)"],
+      ["co-ml-3","<span class='wk'>W3</span>Linear classification, logistic regression, LDA <span class='st'>★</span>"],
+      ["co-ml-4","<span class='wk'>W4</span>Perceptron, SVM & kernels <span class='st'>★</span>"],
+      ["co-ml-5","<span class='wk'>W5</span>ANN + Backpropagation (your DL basics) <span class='st'>★</span>"],
+      ["co-ml-6","<span class='wk'>W6</span>Decision trees"],
+      ["co-ml-7","<span class='wk'>W7</span>Evaluation — cross-validation, ROC, ensemble <span class='st'>★</span>"],
+      ["co-ml-8","<span class='wk'>W8</span>Gradient boosting, random forests, Naive Bayes"],
+      ["co-ml-9","<span class='wk'>W10</span>Clustering — k-means, hierarchical, density"],
+    ]},
+    {t:"🤖 Optional AI add-ons", s:"Only if you want more depth than ML-W5.", items:[
+      ["co-dl-1","<span class='wk'>DL</span>NN/backprop (W4–5), CNN (W7–8), optimizers (W9) — <a href='https://nptel.ac.in/courses/106105215' target='_blank' rel='noopener'>Deep Learning, P.K. Biswas, IIT KGP ↗</a>"],
+      ["co-dl-2","<span class='wk'>NLP</span>Word embeddings, distributional semantics (W7, L31–35) — <a href='https://nptel.ac.in/courses/106105158' target='_blank' rel='noopener'>NLP, Pawan Goyal, IIT KGP ↗</a>"],
+    ]},
+    {t:"🔐 VAPT — Ethical Hacking (priority course)", s:"Indranil Sengupta · IIT KGP · 12 weeks · covers VAPT + crypto + a PUF lecture · <a href='https://nptel.ac.in/courses/106105217' target='_blank' rel='noopener'>course link ↗</a>", items:[
+      ["co-vp-1","<span class='wk'>W1</span>Intro to ethical hacking + networking/TCP-IP recap"],
+      ["co-vp-2","<span class='wk'>W4</span>Info gathering (recon), port scanning with NMAP <span class='st'>★</span>"],
+      ["co-vp-3","<span class='wk'>W5</span>Vuln scanning, system hacking, malware/trojans <span class='st'>★</span>"],
+      ["co-vp-4","<span class='wk'>W6</span>Cryptography — private-key & public-key <span class='st'>★</span>"],
+      ["co-vp-5","<span class='wk'>W7</span>Hash functions, digital signature & certificates (PKI)"],
+      ["co-vp-6","<span class='wk'>W8</span>Network-based attacks, DNS & email security"],
+      ["co-vp-7","<span class='wk'>W9</span>Packet sniffing, social engineering, DoS"],
+      ["co-vp-8","<span class='wk'>W10</span>Hardware security, side-channel, PUF, hardware trojan (your hook!) <span class='st'>★</span>"],
+      ["co-vp-9","<span class='wk'>W11</span>Web app security — SQLi, SQLMAP, XSS, file upload (OWASP) <span class='st'>★</span>"],
+      ["co-vp-10","<span class='wk'>W12</span>NMAP relook, Wireshark, summary"],
+    ]},
+    {t:"⚠️ Not on NPTEL — study from Syllabus tab + your own work", items:[
+      ["co-gap-1","Transformers, attention, LLMs, RAG (no good NPTEL video)"],
+      ["co-gap-2","AI agents (ReAct, tool-calling, multi-agent) — your LangGraph strength 💪"],
+      ["co-gap-3","OWASP Top 10 list, CVE/CVSS, MITRE ATT&CK by name"],
+      ["co-gap-4","Agentic VAPT tools: PentestGPT, VulnBot, AutoPentester"],
+    ]},
+   ]},
+];
+
+/* ============================ STATE ============================ */
+const LS_KEY="p12tracker_v1";
+let state={checks:{},notes:{},updated:null};
+try{ const raw=localStorage.getItem(LS_KEY); if(raw) state=Object.assign(state,JSON.parse(raw)); }catch(e){}
+
+let saveTimer=null;
+function save(){
+  state.updated=new Date().toISOString();
+  try{ localStorage.setItem(LS_KEY,JSON.stringify(state)); }catch(e){}
+  const el=document.getElementById('saved');
+  if(el) el.textContent="saved "+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
+function saveSoon(){ clearTimeout(saveTimer); saveTimer=setTimeout(save,400); }
+
+/* collect all item ids for progress */
+const SECTIONS=DATA.filter(s=>s.groups);
+function itemsOf(sec){ let a=[]; sec.groups.forEach(g=>g.items.forEach(it=>a.push(it[0]))); return a; }
+const ALL_IDS=[]; SECTIONS.forEach(s=>itemsOf(s).forEach(id=>ALL_IDS.push(id)));
+
+/* ============================ RENDER ============================ */
+const tabsEl=document.getElementById('tabs');
+const mainEl=document.getElementById('main');
+let active="dash";
+
+function esc(){}
+function buildTabs(){
+  tabsEl.innerHTML="";
+  DATA.forEach(sec=>{
+    const b=document.createElement('button');
+    b.dataset.tab=sec.id;
+    const done = sec.groups ? itemsOf(sec).filter(id=>state.checks[id]).length : null;
+    const tot = sec.groups ? itemsOf(sec).length : null;
+    b.innerHTML = sec.icon+" "+sec.label + (sec.groups?(" <span class='n'>"+done+"/"+tot+"</span>"):"");
+    if(sec.id===active) b.classList.add('active');
+    b.onclick=()=>{ active=sec.id; render(); window.scrollTo(0,0); };
+    tabsEl.appendChild(b);
+  });
+}
+
+function renderRow(it){
+  const [id,html]=it;
+  const checked=!!state.checks[id];
+  const note=state.notes[id]||"";
+  const row=document.createElement('div');
+  row.className="row"+(checked?" done":"")+(note?" hasnote":"");
+  row.innerHTML =
+    "<label class='chk'><input type='checkbox' "+(checked?"checked":"")+"></label>"+
+    "<div class='main'><div class='txt'>"+html+"</div>"+
+      "<div class='notewrap' "+(note?"":"hidden")+"><textarea placeholder='Your notes… (saved automatically)'>"+
+      note.replace(/</g,"&lt;")+"</textarea></div></div>"+
+    "<button class='notebtn"+(note?" has":"")+"' title='Add / show note'>📝</button>";
+  const cb=row.querySelector('input');
+  const btn=row.querySelector('.notebtn');
+  const nw=row.querySelector('.notewrap');
+  const ta=row.querySelector('textarea');
+  cb.addEventListener('change',()=>{
+    if(cb.checked) state.checks[id]=1; else delete state.checks[id];
+    row.classList.toggle('done',cb.checked);
+    saveSoon(); refreshProgress();
+  });
+  btn.addEventListener('click',()=>{ nw.hidden=!nw.hidden; if(!nw.hidden) ta.focus(); });
+  ta.addEventListener('input',()=>{
+    const v=ta.value;
+    if(v.trim()) state.notes[id]=v; else delete state.notes[id];
+    btn.classList.toggle('has',!!v.trim());
+    row.classList.toggle('hasnote',!!v.trim());
+    saveSoon();
+  });
+  return row;
+}
+
+function renderSection(sec){
+  const frag=document.createDocumentFragment();
+  const head=document.createElement('div');
+  head.className="panelhead";
+  head.innerHTML="<p class='ey'>"+sec.icon+" "+sec.label+"</p><h1>"+sec.intro.h+"</h1><p class='lead'>"+sec.intro.p+"</p>";
+  frag.appendChild(head);
+  sec.groups.forEach(g=>{
+    const done=g.items.filter(it=>state.checks[it[0]]).length;
+    const card=document.createElement('div');
+    card.className="group";
+    let h="<div class='gt'><span class='gprog'>"+done+"/"+g.items.length+"</span>"+g.t+"</div>";
+    if(g.s) h+="<div class='gs'>"+g.s+"</div>";
+    card.innerHTML=h;
+    const rows=document.createElement('div');
+    rows.className="rows";
+    g.items.forEach(it=>rows.appendChild(renderRow(it)));
+    card.appendChild(rows);
+    frag.appendChild(card);
+  });
+  return frag;
+}
+
+function renderDash(){
+  const frag=document.createDocumentFragment();
+  const head=document.createElement('div');
+  head.className="panelhead";
+  head.innerHTML="<p class='ey'>📊 Dashboard</p><h1>P12 Prep Tracker</h1>"+
+    "<p class='lead'>Everything for the IIT Hyderabad P12 (Agentic-AI VAPT) interview in one place — the 18-day plan, the full syllabus, and the NPTEL courses. Tick items, add notes; it all saves in this browser.</p>";
+  frag.appendChild(head);
+
+  // progress card
+  const c1=document.createElement('div'); c1.className="dashcard";
+  let inner="<h3>Progress</h3>";
+  SECTIONS.forEach(s=>{
+    const ids=itemsOf(s); const done=ids.filter(id=>state.checks[id]).length;
+    const p=ids.length?Math.round(done*100/ids.length):0;
+    inner+="<div class='stat'><div class='nm'>"+s.icon+" "+s.label+"</div>"+
+      "<div class='bar'><span style='width:"+p+"%'></span></div>"+
+      "<div class='cnt'>"+done+"/"+ids.length+"</div></div>";
+  });
+  const totDone=ALL_IDS.filter(id=>state.checks[id]).length;
+  const totP=ALL_IDS.length?Math.round(totDone*100/ALL_IDS.length):0;
+  inner+="<div class='stat' style='margin-top:6px;padding-top:12px;border-top:1px solid var(--line)'>"+
+    "<div class='nm'><b>Total</b></div><div class='bar'><span style='width:"+totP+"%'></span></div>"+
+    "<div class='cnt'><b>"+totDone+"/"+ALL_IDS.length+"</b></div></div>";
+  c1.innerHTML=inner;
+  frag.appendChild(c1);
+
+  // sync card
+  const c2=document.createElement('div'); c2.className="dashcard";
+  c2.innerHTML="<h3>💾 Save &amp; sync with GitHub</h3>"+
+    "<div class='btnrow'>"+
+      "<button class='btn primary' id='btnExport'>⬇️ Export progress</button>"+
+      "<button class='btn' id='btnImport'>⬆️ Import progress</button>"+
+      "<button class='btn danger' id='btnReset'>↺ Reset all</button>"+
+    "</div>"+
+    "<ol class='steps'>"+
+      "<li>Put this <code>index.html</code> in a GitHub repo and open it in your browser. Ticks &amp; notes <b>auto-save on this device</b>.</li>"+
+      "<li>To back up or move devices: click <b>Export</b> → it downloads <code>p12-progress.json</code>. Commit that file to your repo.</li>"+
+      "<li>On another device: pull the repo, open the site, click <b>Import</b> → choose <code>p12-progress.json</code>. Done ✅</li>"+
+    "</ol>"+
+    "<p class='hint'>Tip: you can also host it free with GitHub Pages and open it from any browser. Progress still lives per-browser, so keep using Export/Import as your sync.</p>";
+  frag.appendChild(c2);
+  return frag;
+}
+
+function render(){
+  buildTabs();
+  mainEl.innerHTML="";
+  if(active==="dash"){ mainEl.appendChild(renderDash()); wireDash(); }
+  else{ const sec=DATA.find(s=>s.id===active); mainEl.appendChild(renderSection(sec)); }
+  refreshProgress();
+}
+
+function refreshProgress(){
+  const done=ALL_IDS.filter(id=>state.checks[id]).length;
+  const p=ALL_IDS.length?Math.round(done*100/ALL_IDS.length):0;
+  document.getElementById('ovfill').style.width=p+"%";
+  document.getElementById('ovpct').textContent=p+"%";
+  // update tab counts
+  document.querySelectorAll('nav.tabs button').forEach(b=>{
+    const sec=DATA.find(s=>s.id===b.dataset.tab);
+    if(sec&&sec.groups){ const ids=itemsOf(sec); const d=ids.filter(id=>state.checks[id]).length;
+      const n=b.querySelector('.n'); if(n) n.textContent=d+"/"+ids.length; }
+  });
+}
+
+/* ============================ SYNC ============================ */
+function wireDash(){
+  document.getElementById('btnExport').onclick=exportJSON;
+  document.getElementById('btnImport').onclick=()=>document.getElementById('importfile').click();
+  document.getElementById('btnReset').onclick=()=>{
+    if(!confirm("Reset ALL ticks and notes on this device? (Export first if you want a backup.)")) return;
+    state={checks:{},notes:{},updated:null}; save(); render();
+  };
+}
+function exportJSON(){
+  const payload={app:"p12-tracker",version:1,exportedAt:new Date().toISOString(),
+    checks:state.checks,notes:state.notes};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download="p12-progress.json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+document.getElementById('importfile').addEventListener('change',function(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=function(){
+    try{
+      const d=JSON.parse(r.result);
+      if(!d||typeof d!=="object"||!("checks" in d)) throw new Error("bad file");
+      if(!confirm("Load progress from this file? It replaces your current ticks & notes on this device.")) return;
+      state.checks=d.checks||{}; state.notes=d.notes||{};
+      save(); active="dash"; render();
+      alert("Imported ✅  "+Object.keys(state.checks).length+" items ticked, "+Object.keys(state.notes).length+" notes.");
+    }catch(err){ alert("Couldn't read that file — make sure it's a p12-progress.json exported from here."); }
+    e.target.value="";
+  };
+  r.readAsText(f);
+});
+
+render();
+if(state.updated){ const el=document.getElementById('saved'); if(el) el.textContent="last saved "+new Date(state.updated).toLocaleString(); }
+</script>
+</body>
+</html>
