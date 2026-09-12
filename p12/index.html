@@ -152,7 +152,7 @@
 <main class="wrap" id="main"></main>
 
 <input type="file" id="importfile" accept="application/json,.json" hidden>
-<footer>P12 Prep Tracker · runs locally · your ticks &amp; notes are saved in this browser · export to sync via GitHub · <span id="saved"></span></footer>
+<footer>P12 Prep Tracker · progress saves in this browser on this device · use Export/Import to move between devices · <span id="saved"></span></footer>
 
 <script>
 /* ============================ DATA ============================ */
@@ -588,18 +588,20 @@ function renderDash(){
 
   // sync card
   const c2=document.createElement('div'); c2.className="dashcard";
-  c2.innerHTML="<h3>💾 Save &amp; sync with GitHub</h3>"+
+  const exp = state.exportedAt ? ("🗂️ Last backup: "+new Date(state.exportedAt).toLocaleString()) : "🗂️ No backup yet — click Export to make one.";
+  c2.innerHTML="<h3>💾 Back up &amp; move to another device</h3>"+
+    "<p style='margin:0 0 12px;font-size:.92rem'>Your ticks &amp; notes save automatically in <b>this browser on this device</b>. They will <b>not</b> appear on another computer by themselves — use Export/Import to carry them over.</p>"+
     "<div class='btnrow'>"+
-      "<button class='btn primary' id='btnExport'>⬇️ Export progress</button>"+
-      "<button class='btn' id='btnImport'>⬆️ Import progress</button>"+
+      "<button class='btn primary' id='btnExport'>⬇️ Export (save backup)</button>"+
+      "<button class='btn' id='btnImport'>⬆️ Import (load backup)</button>"+
       "<button class='btn danger' id='btnReset'>↺ Reset all</button>"+
     "</div>"+
     "<ol class='steps'>"+
-      "<li>Put this <code>index.html</code> in a GitHub repo and open it in your browser. Ticks &amp; notes <b>auto-save on this device</b>.</li>"+
-      "<li>To back up or move devices: click <b>Export</b> → it downloads <code>p12-progress.json</code>. Commit that file to your repo.</li>"+
-      "<li>On another device: pull the repo, open the site, click <b>Import</b> → choose <code>p12-progress.json</code>. Done ✅</li>"+
+      "<li><b>Back up / move devices:</b> click <b>Export</b> → it downloads <code>p12-progress.json</code>. Keep that file safe.</li>"+
+      "<li><b>On the other device:</b> open this same site, click <b>Import</b> → choose your <code>p12-progress.json</code>. Your progress appears ✅</li>"+
     "</ol>"+
-    "<p class='hint'>Tip: you can also host it free with GitHub Pages and open it from any browser. Progress still lives per-browser, so keep using Export/Import as your sync.</p>";
+    "<p class='hint'>⚠️ Export now and then as a backup — if you clear your browser data, unsaved progress is lost. Keep <code>p12-progress.json</code> private (don't commit it to your public repo).</p>"+
+    "<p class='hint' style='margin-top:4px'>"+exp+"</p>";
   frag.appendChild(c2);
   return frag;
 }
@@ -635,13 +637,15 @@ function wireDash(){
   };
 }
 function exportJSON(){
-  const payload={app:"p12-tracker",version:1,exportedAt:new Date().toISOString(),
+  const now=new Date().toISOString();
+  const payload={app:"p12-tracker",version:1,exportedAt:now,
     checks:state.checks,notes:state.notes};
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a'); a.href=url; a.download="p12-progress.json";
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1500);
+  state.exportedAt=now; save(); if(active==="dash") render();
 }
 document.getElementById('importfile').addEventListener('change',function(e){
   const f=e.target.files[0]; if(!f) return;
@@ -652,6 +656,7 @@ document.getElementById('importfile').addEventListener('change',function(e){
       if(!d||typeof d!=="object"||!("checks" in d)) throw new Error("bad file");
       if(!confirm("Load progress from this file? It replaces your current ticks & notes on this device.")) return;
       state.checks=d.checks||{}; state.notes=d.notes||{};
+      if(d.exportedAt) state.exportedAt=d.exportedAt;
       save(); active="dash"; render();
       alert("Imported ✅  "+Object.keys(state.checks).length+" items ticked, "+Object.keys(state.notes).length+" notes.");
     }catch(err){ alert("Couldn't read that file — make sure it's a p12-progress.json exported from here."); }
