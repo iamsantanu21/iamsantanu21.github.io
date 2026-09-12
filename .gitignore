@@ -2,6 +2,3 @@
 **/.DS_Store
 gallery/originals/
 
-# P12 tracker — keep personal progress/notes private
-p12/p12-progress.json
-p12/*-progress.json

@@ -131,6 +131,10 @@
   .steps li b{color:var(--ink)}
   code{font-family:"IBM Plex Mono",monospace;font-size:.85em;background:var(--surface-2);padding:1px 5px;border-radius:4px}
   .hint{font-size:.82rem;color:var(--faint);margin-top:10px}
+  .inp{flex:1;min-width:180px;font:inherit;font-size:.9rem;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink)}
+  .inp:focus{outline:2px solid var(--teal);outline-offset:1px;background:var(--surface)}
+  .syncstat{font-size:.88rem;margin:0 0 12px;font-weight:600}
+  .syncstat.ok{color:var(--green)} .syncstat.busy{color:var(--amber)} .syncstat.err{color:var(--red)}
 
   footer{color:var(--faint);font-size:.8rem;text-align:center;padding:20px 0}
   @media (max-width:480px){ .stat .nm{width:96px} }
@@ -479,7 +483,7 @@ function save(){
   const el=document.getElementById('saved');
   if(el) el.textContent="saved "+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
 }
-function saveSoon(){ clearTimeout(saveTimer); saveTimer=setTimeout(save,400); }
+function saveSoon(){ clearTimeout(saveTimer); saveTimer=setTimeout(save,400); if(typeof scheduleSync==="function") scheduleSync(); }
 
 /* collect all item ids for progress */
 const SECTIONS=DATA.filter(s=>s.groups);
@@ -603,6 +607,26 @@ function renderDash(){
     "<p class='hint'>⚠️ Export now and then as a backup — if you clear your browser data, unsaved progress is lost. Keep <code>p12-progress.json</code> private (don't commit it to your public repo).</p>"+
     "<p class='hint' style='margin-top:4px'>"+exp+"</p>";
   frag.appendChild(c2);
+
+  // cloud sync card
+  const gc=ghCfg();
+  const c3=document.createElement('div'); c3.className="dashcard";
+  if(!gc.token){
+    c3.innerHTML="<h3>☁️ Auto-sync to GitHub (optional)</h3>"+
+     "<p style='margin:0 0 10px;font-size:.92rem'>Paste a GitHub token to <b>auto-save</b> your progress to <code>"+GH.path+"</code> and <b>auto-load</b> it on any device. ⚠️ Your ticks &amp; notes will be <b>public</b> in this repo.</p>"+
+     "<div class='btnrow'><input class='inp' id='ghtok' type='password' placeholder='Paste GitHub token (github_pat_… or ghp_…)' autocomplete='off' spellcheck='false'><button class='btn primary' id='ghSave'>Connect</button></div>"+
+     "<p class='hint'>Best: a <b>fine-grained</b> token limited to only <code>"+GH.repo+"</code> → Repository permissions → <b>Contents: Read and write</b>, with an expiry. It's stored only in this browser, never in the page or the repo. <a href='https://github.com/settings/personal-access-tokens/new' target='_blank' rel='noopener'>Create a fine-grained token ↗</a></p>";
+  } else {
+    c3.innerHTML="<h3>☁️ Auto-sync to GitHub</h3>"+
+     "<p class='syncstat' id='syncstat'>Connected</p>"+
+     "<div class='btnrow'>"+
+       "<button class='btn primary' id='ghNow'>🔄 Sync now</button>"+
+       "<label class='btn' style='cursor:pointer'><input type='checkbox' id='ghAuto' "+(gc.auto!==false?"checked":"")+" style='margin-right:7px'>Auto-sync</label>"+
+       "<button class='btn danger' id='ghOff'>Disconnect</button>"+
+     "</div>"+
+     "<p class='hint'>Auto-saves to <code>"+GH.path+"</code> a few seconds after each change, and loads the latest when you open the site anywhere. ⚠️ Progress is public in this repo. Token is stored only in this browser.</p>";
+  }
+  frag.appendChild(c3);
   return frag;
 }
 
@@ -633,7 +657,24 @@ function wireDash(){
   document.getElementById('btnImport').onclick=()=>document.getElementById('importfile').click();
   document.getElementById('btnReset').onclick=()=>{
     if(!confirm("Reset ALL ticks and notes on this device? (Export first if you want a backup.)")) return;
-    state={checks:{},notes:{},updated:null}; save(); render();
+    state={checks:{},notes:{},updated:new Date().toISOString(),exportedAt:state.exportedAt}; save(); render(); if(ghCfg().token) ghPushNow();
+  };
+  // cloud sync controls
+  const ghSaveBtn=document.getElementById('ghSave');
+  if(ghSaveBtn) ghSaveBtn.onclick=()=>{
+    const t=(document.getElementById('ghtok').value||"").trim();
+    if(!t){ alert("Paste your GitHub token first."); return; }
+    ghSetCfg({token:t,auto:true}); ghSha=null; render(); setTimeout(ghInitialSync,50);
+  };
+  const ghNowBtn=document.getElementById('ghNow'); if(ghNowBtn) ghNowBtn.onclick=ghPushNow;
+  const ghOffBtn=document.getElementById('ghOff'); if(ghOffBtn) ghOffBtn.onclick=()=>{
+    if(!confirm("Disconnect and remove the token from this browser? Your synced file on GitHub stays.")) return;
+    ghSetCfg({}); ghSha=null; render();
+  };
+  const ghAutoCb=document.getElementById('ghAuto'); if(ghAutoCb) ghAutoCb.onchange=()=>{
+    const c=ghCfg(); c.auto=ghAutoCb.checked; ghSetCfg(c);
+    setStat(ghAutoCb.checked?"Auto-sync on":"Auto-sync off (use Sync now)", ghAutoCb.checked?"ok":"busy");
+    if(ghAutoCb.checked) ghPushNow();
   };
 }
 function exportJSON(){
@@ -665,8 +706,58 @@ document.getElementById('importfile').addEventListener('change',function(e){
   r.readAsText(f);
 });
 
+/* ---------- GitHub cloud sync (optional, token stored only in this browser) ---------- */
+const GH={owner:"iamsantanu21",repo:"iamsantanu21.github.io",path:"p12/p12-progress.json",branch:"main"};
+const GH_KEY="p12_gh_v1";
+let ghSha=null, ghTimer=null, ghBusy=false;
+function ghCfg(){ try{ return JSON.parse(localStorage.getItem(GH_KEY))||{}; }catch(e){ return {}; } }
+function ghSetCfg(c){ try{ localStorage.setItem(GH_KEY,JSON.stringify(c)); }catch(e){} }
+function b64e(s){ return btoa(unescape(encodeURIComponent(s))); }
+function b64d(b){ try{ return decodeURIComponent(escape(atob(b))); }catch(e){ return atob(b); } }
+function setStat(t,cls){ const e=document.getElementById('syncstat'); if(e){ e.textContent=t; e.className="syncstat "+(cls||""); } }
+function ghHead(tok){ return {"Authorization":"Bearer "+tok,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}; }
+async function ghGet(tok){
+  const url="https://api.github.com/repos/"+GH.owner+"/"+GH.repo+"/contents/"+encodeURIComponent(GH.path)+"?ref="+GH.branch+"&t="+Date.now();
+  const r=await fetch(url,{headers:ghHead(tok)});
+  if(r.status===404){ ghSha=null; return null; }
+  if(!r.ok) throw new Error("read "+r.status);
+  const j=await r.json(); ghSha=j.sha;
+  try{ return JSON.parse(b64d((j.content||"").replace(/\n/g,""))); }catch(e){ return null; }
+}
+async function ghPut(tok){
+  const now=new Date().toISOString();
+  const payload={app:"p12-tracker",version:1,updated:now,checks:state.checks,notes:state.notes};
+  const body={message:"Update p12 progress",content:b64e(JSON.stringify(payload,null,2)),branch:GH.branch};
+  if(ghSha) body.sha=ghSha;
+  const url="https://api.github.com/repos/"+GH.owner+"/"+GH.repo+"/contents/"+encodeURIComponent(GH.path);
+  let r=await fetch(url,{method:"PUT",headers:ghHead(tok),body:JSON.stringify(body)});
+  if(r.status===409){ await ghGet(tok); if(ghSha) body.sha=ghSha; r=await fetch(url,{method:"PUT",headers:ghHead(tok),body:JSON.stringify(body)}); }
+  if(!r.ok){ let t=""; try{t=(await r.json()).message||"";}catch(e){} throw new Error((r.status===401||r.status===403)?"bad token / no access":("write "+r.status+" "+t)); }
+  const j=await r.json(); ghSha=(j.content&&j.content.sha)||ghSha; state.updated=now; state.exportedAt=now; save();
+}
+async function ghPushNow(){
+  const c=ghCfg(); if(!c.token) return;
+  if(ghBusy){ return; } ghBusy=true; setStat("Syncing…","busy");
+  try{ if(ghSha===null){ try{ await ghGet(c.token); }catch(e){} } await ghPut(c.token);
+    setStat("Synced ✓  "+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),"ok"); }
+  catch(e){ setStat("Sync error: "+e.message,"err"); }
+  finally{ ghBusy=false; }
+}
+function scheduleSync(){ const c=ghCfg(); if(!c.token||c.auto===false) return; clearTimeout(ghTimer); setStat("Change saved — syncing…","busy"); ghTimer=setTimeout(ghPushNow,4000); }
+async function ghInitialSync(){
+  const c=ghCfg(); if(!c.token) return; setStat("Connecting…","busy");
+  try{
+    const remote=await ghGet(c.token);
+    const lu=state.updated||"", ru=(remote&&remote.updated)||"";
+    if(remote && ru>lu){ state.checks=remote.checks||{}; state.notes=remote.notes||{}; state.updated=remote.updated; state.exportedAt=remote.updated; save(); if(active==="dash") render(); else refreshProgress(); setStat("Loaded latest from GitHub ✓","ok"); }
+    else if(!remote || lu>ru){ await ghPut(c.token); setStat("Synced ✓","ok"); }
+    else setStat("Up to date ✓","ok");
+  }catch(e){ setStat("Sync error: "+e.message,"err"); }
+}
+
 render();
 if(state.updated){ const el=document.getElementById('saved'); if(el) el.textContent="last saved "+new Date(state.updated).toLocaleString(); }
+if(ghCfg().token) ghInitialSync();
 </script>
 </body>
 </html>
